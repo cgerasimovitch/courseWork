@@ -7,8 +7,18 @@
 
 import UIKit
 
-class HomeHeaderView: UITableViewHeaderFooterView {
+class HabitsViewHeaderView: UITableViewHeaderFooterView {
 
+    let headerId = "HabitsViewHeaderView"
+    
+    override init(reuseIdentifier: String?) {
+           super.init(reuseIdentifier: reuseIdentifier)
+           
+       }
+           required init?(coder: NSCoder) {
+               super.init(coder: coder)
+               
+           }
     
     func inspireHeaderSetup(){
         
