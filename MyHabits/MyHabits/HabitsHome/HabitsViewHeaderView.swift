@@ -19,7 +19,7 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
         super.init(reuseIdentifier: reuseIdentifier)
         addEverySubview()
         setupEverySubview()
-        self.contentView.backgroundColor = .blue
+        
        }
     
     required init?(coder: NSCoder) {

@@ -38,6 +38,21 @@
             </objects>
             <point key="canvasLocation" x="854" y="124"/>
         </scene>
+        <!--Info View Controller-->
+        <scene sceneID="Yk2-pJ-TZl">
+            <objects>
+                <viewController id="qEW-A3-Hey" customClass="InfoViewController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="f0C-qe-TmH">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="xto-zy-IxV"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="77w-to-XRs" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1584" y="124"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">

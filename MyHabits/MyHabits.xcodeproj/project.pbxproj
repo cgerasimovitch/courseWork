@@ -19,6 +19,7 @@
 		8405687D26CED8CF006784D8 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8405687C26CED8CF006784D8 /* InfoViewController.swift */; };
 		8409507D26CF67FE007E3B79 /* HabitsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409507C26CF67FE007E3B79 /* HabitsStore.swift */; };
 		8409508326D003B3007E3B79 /* HabitsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409508226D003B3007E3B79 /* HabitsDetailViewController.swift */; };
+		841FBFB626D4305200050FD1 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FBFB526D4305200050FD1 /* LaunchScreenViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		8405687C26CED8CF006784D8 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		8409507C26CF67FE007E3B79 /* HabitsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitsStore.swift; sourceTree = "<group>"; };
 		8409508226D003B3007E3B79 /* HabitsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsDetailViewController.swift; sourceTree = "<group>"; };
+		841FBFB526D4305200050FD1 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LaunchScreenViewController.swift; path = MyHabits/LaunchScreenViewController.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,8 @@
 			isa = PBXGroup;
 			children = (
 				8409508526D003D0007E3B79 /* HabitsHome */,
+				8405687C26CED8CF006784D8 /* InfoViewController.swift */,
+				841FBFB526D4305200050FD1 /* LaunchScreenViewController.swift */,
 				8405685B26CE6018006784D8 /* AppDelegate.swift */,
 				8405685D26CE6018006784D8 /* SceneDelegate.swift */,
 				8409507C26CF67FE007E3B79 /* HabitsStore.swift */,
@@ -78,7 +82,6 @@
 				8405686926CE601A006784D8 /* Info.plist */,
 				8409508226D003B3007E3B79 /* HabitsDetailViewController.swift */,
 				8405687926CED88F006784D8 /* HabitItemViewController.swift */,
-				8405687C26CED8CF006784D8 /* InfoViewController.swift */,
 			);
 			path = MyHabits;
 			sourceTree = "<group>";
@@ -171,6 +174,7 @@
 				8405687726CED714006784D8 /* HabitTableViewCell.swift in Sources */,
 				8405687126CEC816006784D8 /* HabitsViewController.swift in Sources */,
 				8405687D26CED8CF006784D8 /* InfoViewController.swift in Sources */,
+				841FBFB626D4305200050FD1 /* LaunchScreenViewController.swift in Sources */,
 				8405687A26CED890006784D8 /* HabitItemViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
