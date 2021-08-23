@@ -10,64 +10,64 @@ import UIKit
 class HabitsViewController: UIViewController {
     let titleHeader = UILabel()
     let buttonAdd = UIButton()
-    let tableItems = UITableView()
+    let tableItemsView = UITableView()
     override func viewDidLoad() {
         super.viewDidLoad()
         addEverySubview()
         setupEverySubview()
-        addTableViewElements()
+        addTableViewElementsDelegateAndDataSource()
         // Do any additional setup after loading the view.
     }
     
     func addEverySubview(){
         self.view.addSubview(titleHeader)
         self.view.addSubview(buttonAdd)
-        self.view.addSubview(tableItems)
+        self.view.addSubview(tableItemsView)
         
     }
     
     func setupEverySubview(){
-        titleHeaderSetup()
-        titleHeaderSetupLayout()
-        buttonAddSetup()
-        buttonAddSetupLayout()
-        tableItemsSetup()
-        tableItemsSetupLayout()
+        titleHeaderSetup(labelHere: titleHeader)
+        titleHeaderSetupLayout(labelHere: titleHeader)
+        buttonAddSetup(buttonHere: buttonAdd)
+        buttonAddSetupLayout(buttonHere: buttonAdd)
+        tableItemsSetup(tableHere: tableItemsView)
+        tableItemsSetupLayout(tableHere: tableItemsView)
     }
     
-    func addTableViewElements(){
-        tableItems.delegate = self
-        tableItems.dataSource = self
-        tableItems.register(HabitsViewHeaderView.self, forHeaderFooterViewReuseIdentifier: HabitsViewHeaderView().headerId)
-        tableItems.register(HabitTableViewCell.self, forCellReuseIdentifier: HabitTableViewCell.cellId)
+    func addTableViewElementsDelegateAndDataSource(){
+        tableItemsView.delegate = self
+        tableItemsView.dataSource = self
+        tableItemsView.register(HabitsViewHeaderView.self, forHeaderFooterViewReuseIdentifier: HabitsViewHeaderView().headerId)
+        tableItemsView.register(HabitTableViewCell.self, forCellReuseIdentifier: HabitTableViewCell.cellId)
     }
-    // MARK: - Navigation
+    // MARK: - Setup every subview
     
-    func titleHeaderSetup(){
-        titleHeader.text = "Сегодня"
-        titleHeader.font = UIFont(name: "SF Pro Display-Semibold", size: 20)
-        titleHeader.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+    func titleHeaderSetup(labelHere: UILabel){
+        labelHere.text = "Сегодня"
+        labelHere.font = UIFont(name: "SF Pro Display-Semibold", size: 20)
+        labelHere.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
     }
     
-    func titleHeaderSetupLayout(){
-        titleHeader.translatesAutoresizingMaskIntoConstraints = false
+    func titleHeaderSetupLayout(labelHere: UILabel){
+        labelHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            titleHeader.widthAnchor.constraint(equalToConstant: 141),
-            titleHeader.heightAnchor.constraint(equalToConstant: 40),
-            titleHeader.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 92),
-            titleHeader.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 14)
+            labelHere.widthAnchor.constraint(equalToConstant: 141),
+            labelHere.heightAnchor.constraint(equalToConstant: 40),
+            labelHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 92),
+            labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 14)
         ])
         
     }
-    func buttonAddSetup(){
-        buttonAdd.setTitle("+", for: .normal)
-        buttonAdd.setTitleColor(UIColor(red: 161, green: 22, blue: 204, alpha: 1), for: .normal)
-        buttonAdd.backgroundColor = .blue
+    func buttonAddSetup(buttonHere: UIButton){
+        buttonHere.setTitle("+", for: .normal)
+        buttonHere.setTitleColor(UIColor(red: 161, green: 22, blue: 204, alpha: 1), for: .normal)
+        buttonHere.backgroundColor = .blue
         
     }
     
-    func buttonAddSetupLayout(){
-        buttonAdd.translatesAutoresizingMaskIntoConstraints = false
+    func buttonAddSetupLayout(buttonHere: UIButton){
+        tableItemsView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             buttonAdd.widthAnchor.constraint(equalToConstant: 44),
             buttonAdd.heightAnchor.constraint(equalToConstant: 40),
@@ -76,18 +76,24 @@ class HabitsViewController: UIViewController {
         ])
     }
     
-    func tableItemsSetup(){
+    func tableItemsSetup(tableHere: UITableView){
         
     }
     
-    func tableItemsSetupLayout(){
-        
+    func tableItemsSetupLayout(tableHere: UITableView){
+        NSLayoutConstraint.activate([
+            tableHere.topAnchor.constraint(equalTo: titleHeader.bottomAnchor, constant: 7.5),
+            tableHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 1),
+            tableHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -1),
+            tableHere.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+        ])
     }
     
     
 
 }
 
+// MARK: - Setup tableViewDelegate and DataSource
 extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HabitsViewHeaderView().headerId) as! HabitsViewHeaderView
