@@ -86,7 +86,8 @@ class InfoViewController: UIViewController, UIScrollViewDelegate {
             labelHere.topAnchor.constraint(equalTo: titleHeader.bottomAnchor, constant: 16),
             labelHere.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
             labelHere.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
-            labelHere.heightAnchor.constraint(equalToConstant: 876)
+            labelHere.bottomAnchor.constraint(equalTo: infoScrollView.bottomAnchor),
+            labelHere.heightAnchor.constraint(lessThanOrEqualToConstant: 876)
         ])
     }
     
