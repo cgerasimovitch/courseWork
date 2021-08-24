@@ -19,16 +19,16 @@ class InfoViewController: UIViewController {
     }
     
     func addEverySubview(){
-        self.view.addSubview(titleHeader)
         self.view.addSubview(infoScrollView)
         infoScrollView.addSubview(infoLabel)
+        infoScrollView.addSubview(titleHeader)
     }
 
     func setupEverySubview(){
         titleHeaderSetup(labelHere: titleHeader)
         titleHeaderSetupLayout(labelHere: titleHeader)
-        infoScrollViewSetup()
-        infoScrollViewSetupLayout()
+        infoScrollViewSetup(scrollHere: infoScrollView)
+        infoScrollViewSetupLayout(scrollHere: infoScrollView)
         containerViewSetup()
         containerViewSetupLayout()
         infoLabelSetup(labelHere: infoLabel)
@@ -46,15 +46,21 @@ class InfoViewController: UIViewController {
             labelHere.topAnchor.constraint(equalTo: infoScrollView.topAnchor, constant: 22),
             labelHere.widthAnchor.constraint(equalToConstant: 218),
             labelHere.heightAnchor.constraint(equalToConstant: 24),
-            labelHere.leadingAnchor.constraint(equalTo: infoScrollView.trailingAnchor, constant: -16),
+            labelHere.leadingAnchor.constraint(equalTo: infoScrollView.leadingAnchor, constant: 16),
         ])
     }
     
-    func infoScrollViewSetup(){
+    func infoScrollViewSetup(scrollHere: UIScrollView){
         
     }
-    func infoScrollViewSetupLayout(){
-        
+    func infoScrollViewSetupLayout(scrollHere: UIScrollView){
+        scrollHere.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            scrollHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            scrollHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            scrollHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
+            scrollHere.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
     
     func containerViewSetup(){
@@ -75,7 +81,7 @@ class InfoViewController: UIViewController {
             labelHere.topAnchor.constraint(equalTo: titleHeader.bottomAnchor, constant: 16),
             labelHere.leadingAnchor.constraint(equalTo: infoScrollView.leadingAnchor, constant: 16),
             labelHere.trailingAnchor.constraint(equalTo: infoScrollView.trailingAnchor, constant: -16),
-            labelHere.bottomAnchor.constraint(equalTo: infoScrollView.bottomAnchor, constant: 16),
+            labelHere.heightAnchor.constraint(equalToConstant: 876)
         ])
     }
     
