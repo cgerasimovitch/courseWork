@@ -7,13 +7,14 @@
 
 import UIKit
 
-class InfoViewController: UIViewController {
+class InfoViewController: UIViewController, UIScrollViewDelegate {
     let titleHeader = UILabel()
     let infoScrollView = UIScrollView()
     let infoLabel = UILabel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        infoScrollView.delegate = self
         addEverySubview()
         setupEverySubview()
     }
@@ -27,7 +28,6 @@ class InfoViewController: UIViewController {
     func setupEverySubview(){
         titleHeaderSetup(labelHere: titleHeader)
         titleHeaderSetupLayout(labelHere: titleHeader)
-        infoScrollViewSetup(scrollHere: infoScrollView)
         infoScrollViewSetupLayout(scrollHere: infoScrollView)
         containerViewSetup()
         containerViewSetupLayout()
@@ -50,8 +50,11 @@ class InfoViewController: UIViewController {
         ])
     }
     
-    func infoScrollViewSetup(scrollHere: UIScrollView){
-        
+    
+    func scrollViewDidZoom(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.x != 0 {
+                scrollView.contentOffset.x = 0
+            }
     }
     func infoScrollViewSetupLayout(scrollHere: UIScrollView){
         scrollHere.translatesAutoresizingMaskIntoConstraints = false
@@ -73,14 +76,16 @@ class InfoViewController: UIViewController {
     
     func infoLabelSetup(labelHere: UILabel){
         labelHere.text = "Прохождение этапов, за которые за 21 день вырабатывается привычка, подчиняется следующему алгоритму:\n\n1. Провести 1 день без обращения к старым привычкам, стараться вести себя так, как будто цель, загаданная в перспективу, находится на расстоянии шага.\n\n2. Выдержать 2 дня в прежнем состоянии самоконтроля.\n\n3. Отметить в дневнике первую неделю изменений и подвести первые итоги — что оказалось тяжело, что — легче, с чем еще предстоит серьезно бороться. \n\n4. Поздравить себя с прохождением первого серьезного порога в 21 день. За это время отказ от дурных наклонностей уже примет форму осознанного преодоления и человек сможет больше работать в сторону принятия положительных качеств.\n\n5. Держать планку 40 дней. Практикующий методику уже чувствует себя освободившимся от прошлого негатива и двигается в нужном направлении с хорошей динамикой."
+        labelHere.numberOfLines = 0
+        labelHere.lineBreakMode = .byWordWrapping
     }
     
     func infoLabelSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             labelHere.topAnchor.constraint(equalTo: titleHeader.bottomAnchor, constant: 16),
-            labelHere.leadingAnchor.constraint(equalTo: infoScrollView.leadingAnchor, constant: 16),
-            labelHere.trailingAnchor.constraint(equalTo: infoScrollView.trailingAnchor, constant: -16),
+            labelHere.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
+            labelHere.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
             labelHere.heightAnchor.constraint(equalToConstant: 876)
         ])
     }
