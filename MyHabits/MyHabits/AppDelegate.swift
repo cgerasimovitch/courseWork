@@ -10,28 +10,11 @@ import UIKit
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-    var firstTabNavigationController : UINavigationController!
-    var secondTabNavigationControoller : UINavigationController!
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        let tabBarController = UITabBarController()
-        
-        
-        firstTabNavigationController = UINavigationController.init(rootViewController: HabitsViewController())
-        secondTabNavigationControoller = UINavigationController.init(rootViewController: InfoViewController())
-        tabBarController.viewControllers = [firstTabNavigationController, secondTabNavigationControoller]
-        
-        let item1 = UITabBarItem(title: "Привычки", image: UIImage(named: "Habits_tab_icon"), tag: 0)
-        let item2 = UITabBarItem(title: "Информация", image:  UIImage(named: "info_tab_icon"), tag: 1)
-        
-        firstTabNavigationController.tabBarItem = item1
-        secondTabNavigationControoller.tabBarItem = item2
-        UITabBar.appearance().tintColor = .systemGray2
-                
-        self.window?.rootViewController = tabBarController
-        self.window?.makeKeyAndVisible()
         return true
     }
 

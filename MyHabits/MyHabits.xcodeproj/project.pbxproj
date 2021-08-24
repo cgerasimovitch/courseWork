@@ -20,6 +20,7 @@
 		8409507D26CF67FE007E3B79 /* HabitsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409507C26CF67FE007E3B79 /* HabitsStore.swift */; };
 		8409508326D003B3007E3B79 /* HabitsDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8409508226D003B3007E3B79 /* HabitsDetailViewController.swift */; };
 		841FBFB626D4305200050FD1 /* LaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841FBFB526D4305200050FD1 /* LaunchScreenViewController.swift */; };
+		84C0859E26D53EA0007588BF /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C0859D26D53EA0007588BF /* ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		8409507C26CF67FE007E3B79 /* HabitsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HabitsStore.swift; sourceTree = "<group>"; };
 		8409508226D003B3007E3B79 /* HabitsDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsDetailViewController.swift; sourceTree = "<group>"; };
 		841FBFB526D4305200050FD1 /* LaunchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LaunchScreenViewController.swift; path = MyHabits/LaunchScreenViewController.swift; sourceTree = SOURCE_ROOT; };
+		84C0859D26D53EA0007588BF /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				8409508526D003D0007E3B79 /* HabitsHome */,
 				8405687C26CED8CF006784D8 /* InfoViewController.swift */,
 				841FBFB526D4305200050FD1 /* LaunchScreenViewController.swift */,
+				84C0859D26D53EA0007588BF /* ViewController.swift */,
 				8405685B26CE6018006784D8 /* AppDelegate.swift */,
 				8405685D26CE6018006784D8 /* SceneDelegate.swift */,
 				8409507C26CF67FE007E3B79 /* HabitsStore.swift */,
@@ -170,6 +173,7 @@
 				8409508326D003B3007E3B79 /* HabitsDetailViewController.swift in Sources */,
 				8405687426CED612006784D8 /* HabitsViewHeaderView.swift in Sources */,
 				8405685C26CE6018006784D8 /* AppDelegate.swift in Sources */,
+				84C0859E26D53EA0007588BF /* ViewController.swift in Sources */,
 				8405685E26CE6018006784D8 /* SceneDelegate.swift in Sources */,
 				8405687726CED714006784D8 /* HabitTableViewCell.swift in Sources */,
 				8405687126CEC816006784D8 /* HabitsViewController.swift in Sources */,
