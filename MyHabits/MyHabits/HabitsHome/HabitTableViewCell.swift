@@ -95,7 +95,7 @@ class HabitTableViewCell: UITableViewCell {
             imageViewHere.widthAnchor.constraint(equalToConstant: 38),
             imageViewHere.heightAnchor.constraint(equalToConstant: 38),
             imageViewHere.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            imageViewHere.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 25)
+            imageViewHere.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: 25)
         ])
     }
 

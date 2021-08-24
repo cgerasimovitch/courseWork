@@ -61,18 +61,16 @@ class HabitsViewController: UIViewController {
     }
     func buttonAddSetup(buttonHere: UIButton){
         buttonHere.setTitle("+", for: .normal)
-        buttonHere.setTitleColor(UIColor(red: 161, green: 22, blue: 204, alpha: 1), for: .normal)
-        buttonHere.backgroundColor = .blue
-        
+        buttonHere.setTitleColor(UIColor(red: 0.63, green: 0.09, blue: 0.80, alpha: 1.00), for: .normal)
     }
     
     func buttonAddSetupLayout(buttonHere: UIButton){
-        tableItemsView.translatesAutoresizingMaskIntoConstraints = false
+        buttonHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            buttonAdd.widthAnchor.constraint(equalToConstant: 44),
-            buttonAdd.heightAnchor.constraint(equalToConstant: 40),
-            buttonAdd.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 44),
-            buttonAdd.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -5)
+            buttonHere.widthAnchor.constraint(equalToConstant: 44),
+            buttonHere.heightAnchor.constraint(equalToConstant: 40),
+            buttonHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 44),
+            buttonHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -5)
         ])
     }
     
@@ -81,6 +79,7 @@ class HabitsViewController: UIViewController {
     }
     
     func tableItemsSetupLayout(tableHere: UITableView){
+        tableHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableHere.topAnchor.constraint(equalTo: titleHeader.bottomAnchor, constant: 7.5),
             tableHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 1),
@@ -101,7 +100,7 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        300
+        60
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         1
