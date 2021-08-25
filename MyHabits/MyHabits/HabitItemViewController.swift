@@ -10,7 +10,7 @@ import UIKit
 class HabitItemViewController: UIViewController {
 
     let itemNameHeader = UILabel()
-    let itemNameTextView = UITextView()
+    let itemNameTextField = UITextField()
     let itemColorHeader = UILabel()
     let itemColorView = UIView()
     let itemTimeHeader = UILabel()
@@ -19,13 +19,15 @@ class HabitItemViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        
         addEverySubview()
         setupEverySubview()
     }
     
     func addEverySubview() {
         self.view.addSubview(itemNameHeader)
-        self.view.addSubview(itemNameTextView)
+        self.view.addSubview(itemNameTextField)
         self.view.addSubview(itemColorHeader)
         self.view.addSubview(itemColorView)
         self.view.addSubview(itemTimeHeader)
@@ -36,8 +38,8 @@ class HabitItemViewController: UIViewController {
     func setupEverySubview() {
         itemNameHeaderSetup(labelHere: itemNameHeader)
         itemNameHeaderSetupLayout(labelHere: itemNameHeader)
-        itemNameTextViewSetup(textViewHere: itemNameTextView)
-        itemNameTextViewSetupLayout(textViewHere: itemNameTextView)
+        itemNameTextViewSetup(textFieldHere: itemNameTextField)
+        itemNameTextViewSetupLayout(textFieldHere: itemNameTextField)
         itemColorHeaderSetup(labelHere: itemColorHeader)
         itemColorHeaderSetupLayout(labelHere: itemColorHeader)
         itemColorViewSetup(viewHere: itemColorView)
@@ -57,24 +59,24 @@ class HabitItemViewController: UIViewController {
     func itemNameHeaderSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            labelHere.widthAnchor.constraint(equalToConstant: 74),
+            labelHere.widthAnchor.constraint(equalToConstant: 100),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
             labelHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 21),
             labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         ])
     }
     
-    func itemNameTextViewSetup(textViewHere: UITextView){
-        
+    func itemNameTextFieldSetup(textFieldHere: UITextField){
+        textFieldHere.placeholder = "Бегать по утрам, спать 8 часов и т.п."
     }
     
-    func itemNameTextViewSetupLayout(textViewHere: UITextView){
-        textViewHere.translatesAutoresizingMaskIntoConstraints = false
+    func itemNameTextFieldSetupLayout(textFieldHere: UITextField){
+        textFieldHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            textViewHere.widthAnchor.constraint(equalToConstant: 295),
-            textViewHere.heightAnchor.constraint(equalToConstant: 22),
-            textViewHere.topAnchor.constraint(equalTo: itemNameHeader.bottomAnchor, constant: 7),
-            textViewHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 15)
+            textFieldHere.widthAnchor.constraint(equalToConstant: 295),
+            textFieldHere.heightAnchor.constraint(equalToConstant: 22),
+            textFieldHere.topAnchor.constraint(equalTo: itemNameHeader.bottomAnchor, constant: 7),
+            textFieldHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 15)
         ])
     }
     

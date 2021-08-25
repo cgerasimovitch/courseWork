@@ -14,9 +14,15 @@ class InfoViewController: UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+    }
+    
+    override func viewWillLayoutSubviews() {
         infoScrollView.delegate = self
         addEverySubview()
         setupEverySubview()
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        title = "Информация"
     }
     
     func addEverySubview(){

@@ -67,7 +67,10 @@ class HabitsViewController: UIViewController {
     }
     
     @objc func addNewItem(){
-        self.navigationController?.present(HabitItemViewController(), animated: true, completion: nil)
+        let vc = HabitItemViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self.navigationController?.pushViewController(vc, animated: true)
+        
     }
     
     func buttonAddSetupLayout(buttonHere: UIButton){
