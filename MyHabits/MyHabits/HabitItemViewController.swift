@@ -16,15 +16,23 @@ class HabitItemViewController: UIViewController {
     let itemTimeHeader = UILabel()
     let itemCurrentTimeLabel = UILabel()
     let itemcalendar = UIDatePicker()
+    var screenNameContainer = ""
     override func viewDidLoad() {
-        super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        
+        super.viewDidLoad()
+        title = screenNameContainer
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(dismissViewController))
+    }
+    
+    override func viewWillLayoutSubviews() {
         addEverySubview()
         setupEverySubview()
     }
     
+    @objc func dismissViewController(){
+        self.navigationController?.popViewController(animated: true)
+    }
     func addEverySubview() {
         self.view.addSubview(itemNameHeader)
         self.view.addSubview(itemNameTextField)
@@ -38,8 +46,8 @@ class HabitItemViewController: UIViewController {
     func setupEverySubview() {
         itemNameHeaderSetup(labelHere: itemNameHeader)
         itemNameHeaderSetupLayout(labelHere: itemNameHeader)
-        itemNameTextViewSetup(textFieldHere: itemNameTextField)
-        itemNameTextViewSetupLayout(textFieldHere: itemNameTextField)
+        itemNameTextFieldSetup(textFieldHere: itemNameTextField)
+        itemNameTextFieldSetupLayout(textFieldHere: itemNameTextField)
         itemColorHeaderSetup(labelHere: itemColorHeader)
         itemColorHeaderSetupLayout(labelHere: itemColorHeader)
         itemColorViewSetup(viewHere: itemColorView)
@@ -89,7 +97,7 @@ class HabitItemViewController: UIViewController {
         NSLayoutConstraint.activate([
             labelHere.widthAnchor.constraint(equalToConstant: 36),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
-            labelHere.topAnchor.constraint(equalTo: itemNameTextView.bottomAnchor, constant: 15),
+            labelHere.topAnchor.constraint(equalTo: itemNameTextField.bottomAnchor, constant: 15),
             labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         ])
     }
