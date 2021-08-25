@@ -23,6 +23,7 @@ class HabitItemViewController: UIViewController {
         super.viewDidLoad()
         title = screenNameContainer
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(dismissViewController))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveItem))
     }
     
     override func viewWillLayoutSubviews() {
@@ -32,6 +33,10 @@ class HabitItemViewController: UIViewController {
     
     @objc func dismissViewController(){
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func saveItem(){
+        
     }
     func addEverySubview() {
         self.view.addSubview(itemNameHeader)
@@ -95,7 +100,7 @@ class HabitItemViewController: UIViewController {
     func itemColorHeaderSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            labelHere.widthAnchor.constraint(equalToConstant: 36),
+            labelHere.widthAnchor.constraint(equalToConstant: 60),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
             labelHere.topAnchor.constraint(equalTo: itemNameTextField.bottomAnchor, constant: 15),
             labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
@@ -103,7 +108,9 @@ class HabitItemViewController: UIViewController {
     }
     
     func itemColorViewSetup(viewHere: UIView){
-        
+        viewHere.backgroundColor = UIColor(red: 1.00, green: 0.62, blue: 0.31, alpha: 1.00)
+        viewHere.layer.cornerRadius = 15
+
     }
     
     func itemColorViewSetupLayout(viewHere: UIView){
@@ -122,7 +129,7 @@ class HabitItemViewController: UIViewController {
     func itemTimeHeaderSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            labelHere.widthAnchor.constraint(equalToConstant: 47),
+            labelHere.widthAnchor.constraint(equalToConstant: 60),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
             labelHere.topAnchor.constraint(equalTo: itemColorView.bottomAnchor, constant: 15),
             labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
