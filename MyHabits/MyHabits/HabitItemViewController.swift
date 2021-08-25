@@ -18,7 +18,7 @@ class HabitItemViewController: UIViewController {
     let itemcalendar = UIDatePicker()
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.view.backgroundColor = .white
         addEverySubview()
         setupEverySubview()
     }
@@ -51,7 +51,7 @@ class HabitItemViewController: UIViewController {
     }
     // MARK: - Setup every subview
     func itemNameHeaderSetup(labelHere: UILabel){
-        
+        labelHere.text = "НАЗВАНИЕ"
     }
     
     func itemNameHeaderSetupLayout(labelHere: UILabel){
@@ -79,7 +79,7 @@ class HabitItemViewController: UIViewController {
     }
     
     func itemColorHeaderSetup(labelHere: UILabel){
-    
+        labelHere.text = "ЦВЕТ"
     }
     
     func itemColorHeaderSetupLayout(labelHere: UILabel){
@@ -107,7 +107,7 @@ class HabitItemViewController: UIViewController {
     }
     
     func itemTimeHeaderSetup(labelHere: UILabel){
-        
+        labelHere.text = "ВРЕМЯ"
     }
     func itemTimeHeaderSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
@@ -132,7 +132,7 @@ class HabitItemViewController: UIViewController {
         ])
     }
     func itemDataPickerSetup(dataPickerHere: UIDatePicker){
-        
+        dataPickerHere.datePickerMode = .time
     }
     func itemDataPickerSetupLayout(dataPickerHere: UIDatePicker){
         dataPickerHere.translatesAutoresizingMaskIntoConstraints = false

@@ -13,6 +13,7 @@ class HabitsViewController: UIViewController {
     let tableItemsView = UITableView()
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.setNavigationBarHidden(false, animated: false)
         addEverySubview()
         setupEverySubview()
         addTableViewElementsDelegateAndDataSource()
@@ -62,6 +63,11 @@ class HabitsViewController: UIViewController {
     func buttonAddSetup(buttonHere: UIButton){
         buttonHere.setTitle("+", for: .normal)
         buttonHere.setTitleColor(UIColor(red: 0.63, green: 0.09, blue: 0.80, alpha: 1.00), for: .normal)
+        buttonHere.addTarget(self, action: #selector(addNewItem), for: .touchUpInside)
+    }
+    
+    @objc func addNewItem(){
+        self.navigationController?.present(HabitItemViewController(), animated: true, completion: nil)
     }
     
     func buttonAddSetupLayout(buttonHere: UIButton){
