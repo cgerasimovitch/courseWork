@@ -17,6 +17,7 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = .white
         addEverySubview()
         setupEverySubview()
         
@@ -29,8 +30,8 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
     
     func addEverySubview(){
         self.contentView.addSubview(inspireHeader)
-        self.contentView.addSubview(inspireProgressView)
         self.contentView.addSubview(inspireProgressHeader)
+        self.contentView.addSubview(inspireProgressView)
     }
     
     func setupEverySubview(){
@@ -38,8 +39,8 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
         inspireHeaderSetupLayout(labelHere: inspireHeader)
         inspireProgressHeaderSetup(labelHere: inspireProgressHeader)
         inspireProgressHeaderSetupLayout(labelHere: inspireProgressHeader)
-        progressbarSetup(hereProgressView: inspireProgressView)
-        progressbarSetupLayout(hereProgressView: inspireProgressView)
+        progressviewSetup(hereProgressView: inspireProgressView)
+        progressviewSetupLayout(hereProgressView: inspireProgressView)
     }
     
     
@@ -72,24 +73,26 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
         NSLayoutConstraint.activate([
             labelHere.widthAnchor.constraint(equalToConstant: 95),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
-            labelHere.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 10),
-            labelHere.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: 12)
+            labelHere.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
+            labelHere.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12)
         ])
     }
     //https://www.uicolor.io/
-    func progressbarSetup(hereProgressView: UIProgressView){
+    func progressviewSetup(hereProgressView: UIProgressView){
 
         hereProgressView.progressTintColor = UIColor(red: 0.63, green: 0.09, blue: 0.80, alpha: 1.00)
-        hereProgressView.trackTintColor = .systemGray2
+        hereProgressView.trackTintColor = UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.00)
     }
     
-    func progressbarSetupLayout(hereProgressView: UIProgressView){
+    func progressviewSetupLayout(hereProgressView: UIProgressView){
+        hereProgressView.translatesAutoresizingMaskIntoConstraints = false
+        
         NSLayoutConstraint.activate([
-            
             hereProgressView.heightAnchor.constraint(equalToConstant: 7),
-            hereProgressView.bottomAnchor.constraint(equalTo: self.safeAreaLayoutGuide.bottomAnchor, constant: -12),
-            hereProgressView.leadingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.leadingAnchor, constant: 12),
-            hereProgressView.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: 12)
+            hereProgressView.topAnchor.constraint(equalTo: inspireHeader.bottomAnchor, constant: 10),
+            hereProgressView.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -15),
+            hereProgressView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
+            hereProgressView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12)
         ])
     }
 
