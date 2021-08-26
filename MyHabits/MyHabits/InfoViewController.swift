@@ -68,7 +68,7 @@ class InfoViewController: UIViewController, UIScrollViewDelegate {
             scrollHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             scrollHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
             scrollHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            scrollHere.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            scrollHere.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
     

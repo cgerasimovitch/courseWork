@@ -150,6 +150,7 @@ class HabitItemViewController: UIViewController {
     }
     func itemDataPickerSetup(dataPickerHere: UIDatePicker){
         dataPickerHere.datePickerMode = .time
+        dataPickerHere.preferredDatePickerStyle = .wheels
     }
     func itemDataPickerSetupLayout(dataPickerHere: UIDatePicker){
         dataPickerHere.translatesAutoresizingMaskIntoConstraints = false
