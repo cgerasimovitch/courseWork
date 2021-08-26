@@ -46,7 +46,7 @@ class HabitTableViewCell: UITableViewCell {
     
     // MARK: - Setup every subview
     func titleSetup(labelHere: UILabel){
-        
+        labelHere.text = "Собирать тестовые сборки"
     }
     func titleSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
@@ -59,7 +59,8 @@ class HabitTableViewCell: UITableViewCell {
     }
     
     func subtitleSetup(labelHere: UILabel){
-        
+        labelHere.text = "Три раза в день"
+        labelHere.textColor = .systemGray2
     }
     func subtitleSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
@@ -72,7 +73,8 @@ class HabitTableViewCell: UITableViewCell {
     }
     
     func counterTitleSetup(labelHere: UILabel){
-        
+        labelHere.text = "Cчётчик: 3"
+        labelHere.textColor = .systemGray2
     }
     
     func counterTitleSetupLayout(labelHere: UILabel){
@@ -80,13 +82,15 @@ class HabitTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             labelHere.widthAnchor.constraint(equalToConstant: 188),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
-            labelHere.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 20),
+            labelHere.topAnchor.constraint(equalTo: cellSubtitle.bottomAnchor, constant: 30),
+            labelHere.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
             labelHere.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)
         ])
     }
     
     func checkmarkSetup(imageViewHere: UIImageView){
-        imageViewHere.backgroundColor = .blue
+        imageViewHere.backgroundColor = UIColor(red: 1.00, green: 0.62, blue: 0.31, alpha: 1.00)
+        imageViewHere.layer.cornerRadius = 19
     }
     
     func checkmarkSetupLayout(imageViewHere: UIImageView){
@@ -95,7 +99,7 @@ class HabitTableViewCell: UITableViewCell {
             imageViewHere.widthAnchor.constraint(equalToConstant: 38),
             imageViewHere.heightAnchor.constraint(equalToConstant: 38),
             imageViewHere.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            imageViewHere.trailingAnchor.constraint(equalTo: self.safeAreaLayoutGuide.trailingAnchor, constant: 25)
+            imageViewHere.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25)
         ])
     }
 
