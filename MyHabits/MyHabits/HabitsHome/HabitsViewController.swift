@@ -67,8 +67,9 @@ class HabitsViewController: UIViewController {
     }
     
     @objc func addNewItem(){
-        let vc = HabitItemViewController()
-        vc.modalPresentationStyle = .fullScreen
+        let vc = HabitViewController()
+        vc.screenNameContainer = "Создать"
+        vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
         self.navigationController?.pushViewController(vc, animated: true)
         
     }

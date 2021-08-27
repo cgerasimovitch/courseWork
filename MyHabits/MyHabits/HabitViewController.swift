@@ -7,7 +7,7 @@
 
 import UIKit
 
-class HabitItemViewController: UIViewController {
+class HabitViewController: UIViewController {
 
     let itemNameHeader = UILabel()
     let itemNameTextField = UITextField()
@@ -110,8 +110,26 @@ class HabitItemViewController: UIViewController {
     func itemColorViewSetup(viewHere: UIView){
         viewHere.backgroundColor = UIColor(red: 1.00, green: 0.62, blue: 0.31, alpha: 1.00)
         viewHere.layer.cornerRadius = 15
-
+        viewHere.isUserInteractionEnabled = true
+        //Add gesture
+        let gesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(itemColorViewAction))
+        gesture.numberOfTapsRequired = 1
+        viewHere.addGestureRecognizer(gesture)
     }
+    
+    @objc func itemColorViewAction(){
+        let colorPicker = HabitColorViewController()
+       
+        // Setting the Initial Color of the Picker
+        colorPicker.selectedColor = itemColorView.backgroundColor!
+
+        // Setting Delegate
+        colorPicker.delegate = self
+
+        // Presenting the Color Picker
+        self.present(colorPicker, animated: true, completion: nil)
+    }
+    
     
     func itemColorViewSetupLayout(viewHere: UIView){
         viewHere.translatesAutoresizingMaskIntoConstraints = false
@@ -162,9 +180,13 @@ class HabitItemViewController: UIViewController {
         ])
     }
 
-    
-    // MARK: - Navigation
+}
 
+extension HabitViewController: UIColorPickerViewControllerDelegate {
     
-
+    //  Called once you have finished picking the color.
+    func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
+        self.itemColorView.backgroundColor = viewController.selectedColor
+        
+    }
 }
