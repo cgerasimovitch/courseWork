@@ -69,6 +69,7 @@ class HabitsViewController: UIViewController {
     @objc func addNewItem(){
         let vc = HabitViewController()
         vc.screenNameContainer = "Создать"
+        vc.itemColorView.backgroundColor = .white
         vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
         self.navigationController?.pushViewController(vc, animated: true)
         

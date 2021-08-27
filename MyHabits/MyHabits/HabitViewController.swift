@@ -15,7 +15,8 @@ class HabitViewController: UIViewController {
     let itemColorView = UIView()
     let itemTimeHeader = UILabel()
     let itemCurrentTimeLabel = UILabel()
-    let itemcalendar = UIDatePicker()
+    let itemDatePicker = UIDatePicker()
+    var chosenDate = Date()
     var screenNameContainer = ""
     override func viewDidLoad() {
         self.view.backgroundColor = .white
@@ -36,7 +37,13 @@ class HabitViewController: UIViewController {
     }
     
     @objc func saveItem(){
-        
+        if let name = itemNameTextField.text{
+        let newHabit = Habit(name: itemNameTextField.text!,
+                             date: chosenDate,
+                             color: itemColorView.backgroundColor!)
+        let store = HabitsStore.shared
+            store.habits.append(newHabit)}
+        else {return}
     }
     func addEverySubview() {
         self.view.addSubview(itemNameHeader)
@@ -45,7 +52,7 @@ class HabitViewController: UIViewController {
         self.view.addSubview(itemColorView)
         self.view.addSubview(itemTimeHeader)
         self.view.addSubview(itemCurrentTimeLabel)
-        self.view.addSubview(itemcalendar)
+        self.view.addSubview(itemDatePicker)
     }
     
     func setupEverySubview() {
@@ -61,8 +68,8 @@ class HabitViewController: UIViewController {
         itemTimeHeaderSetupLayout(labelHere: itemTimeHeader)
         itemCurrentTimeLabelSetup(labelHere: itemCurrentTimeLabel)
         itemCurrentTimeLabelSetupLayout(labelHere: itemCurrentTimeLabel)
-        itemDataPickerSetup(dataPickerHere: itemcalendar)
-        itemDataPickerSetupLayout(dataPickerHere: itemcalendar)
+        itemDatePickerSetup(datePickerHere: itemDatePicker)
+        itemDatePickerSetupLayout(datePickerHere: itemDatePicker)
     }
     // MARK: - Setup every subview
     func itemNameHeaderSetup(labelHere: UILabel){
@@ -166,19 +173,33 @@ class HabitViewController: UIViewController {
             labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         ])
     }
-    func itemDataPickerSetup(dataPickerHere: UIDatePicker){
-        dataPickerHere.datePickerMode = .time
-        dataPickerHere.preferredDatePickerStyle = .wheels
+    func itemDatePickerSetup(datePickerHere: UIDatePicker){
+        datePickerHere.datePickerMode = .time
+        datePickerHere.preferredDatePickerStyle = .wheels
+        datePickerHere.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
+        
     }
-    func itemDataPickerSetupLayout(dataPickerHere: UIDatePicker){
-        dataPickerHere.translatesAutoresizingMaskIntoConstraints = false
+    
+    @objc func dateChanged(_ sender: UIDatePicker) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        let stringDate = formatter.string(from: itemDatePicker.date)
+        chosenDate = formatter.date(from: stringDate)!
+        print(stringDate)
+       
+    }
+    func itemDatePickerSetupLayout(datePickerHere: UIDatePicker){
+        datePickerHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            dataPickerHere.heightAnchor.constraint(equalToConstant: 216),
-            dataPickerHere.topAnchor.constraint(equalTo: itemCurrentTimeLabel.bottomAnchor, constant: 15),
-            dataPickerHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            dataPickerHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+            datePickerHere.heightAnchor.constraint(equalToConstant: 216),
+            datePickerHere.topAnchor.constraint(equalTo: itemCurrentTimeLabel.bottomAnchor, constant: 15),
+            datePickerHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
+            datePickerHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
+    
+    
+
 
 }
 
@@ -190,3 +211,4 @@ extension HabitViewController: UIColorPickerViewControllerDelegate {
         
     }
 }
+
