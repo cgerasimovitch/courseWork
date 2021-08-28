@@ -25,6 +25,7 @@ class HabitViewController: UIViewController {
         title = screenNameContainer
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(dismissViewController))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveItem))
+        fetchDate()
     }
     
     override func viewWillLayoutSubviews() {
@@ -37,13 +38,15 @@ class HabitViewController: UIViewController {
     }
     
     @objc func saveItem(){
-        if let name = itemNameTextField.text{
+        if itemNameTextField.text != ""{
         let newHabit = Habit(name: itemNameTextField.text!,
                              date: chosenDate,
                              color: itemColorView.backgroundColor!)
         let store = HabitsStore.shared
             store.habits.append(newHabit)}
-        else {return}
+        else {
+            print("Empty Habit")
+            return}
     }
     func addEverySubview() {
         self.view.addSubview(itemNameHeader)
@@ -179,14 +182,16 @@ class HabitViewController: UIViewController {
         datePickerHere.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         
     }
-    
-    @objc func dateChanged(_ sender: UIDatePicker) {
+    func fetchDate(){
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
         let stringDate = formatter.string(from: itemDatePicker.date)
         chosenDate = formatter.date(from: stringDate)!
         print(stringDate)
-       
+        print(chosenDate)
+    }
+    @objc func dateChanged(_ sender: UIDatePicker) {
+        fetchDate()
     }
     func itemDatePickerSetupLayout(datePickerHere: UIDatePicker){
         datePickerHere.translatesAutoresizingMaskIntoConstraints = false
@@ -198,8 +203,13 @@ class HabitViewController: UIViewController {
         ])
     }
     
-    
-
+    //MARK: - Saving Habit
+    @objc func saveHabit(name: String, date: Date, color: UIColor){
+    let newHabit = Habit(name: name,
+                         date: date,
+                         color: color)
+    let store = HabitsStore.shared
+        store.habits.append(newHabit)}
 
 }
 
