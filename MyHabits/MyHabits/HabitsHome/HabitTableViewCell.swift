@@ -13,7 +13,7 @@ class HabitTableViewCell: UITableViewCell {
     var habitcellTitle = UILabel()
     let cellSubtitle = UILabel()
     let cellCounterTitle = UILabel()
-    let checkMarkView = UIImageView()
+    let checkMarkView = UIView()
     let checkMarkMarkLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -27,10 +27,10 @@ class HabitTableViewCell: UITableViewCell {
         }
     
     func addEverySubview(){
-        self.addSubview(habitcellTitle)
-        self.addSubview(cellSubtitle)
-        self.addSubview(cellCounterTitle)
-        self.addSubview(checkMarkView)
+        self.contentView.addSubview(habitcellTitle)
+        self.contentView.addSubview(cellSubtitle)
+        self.contentView.addSubview(cellCounterTitle)
+        self.contentView.addSubview(checkMarkView)
         checkMarkView.addSubview(checkMarkMarkLabel)
     }
     
@@ -41,8 +41,8 @@ class HabitTableViewCell: UITableViewCell {
         subtitleSetupLayout(labelHere: cellSubtitle)
         counterTitleSetup(labelHere: cellCounterTitle)
         counterTitleSetupLayout(labelHere: cellCounterTitle)
-        checkmarkSetup(imageViewHere: checkMarkView)
-        checkmarkSetupLayout(imageViewHere: checkMarkView)
+        checkmarkSetup(viewHere: checkMarkView)
+        checkmarkSetupLayout(viewHere: checkMarkView)
         checkmarkMarkSetup(labelhere: checkMarkMarkLabel)
         checkmarkMarkSetupLayout(labelHere: checkMarkMarkLabel)
     }
@@ -57,8 +57,8 @@ class HabitTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             labelHere.widthAnchor.constraint(equalToConstant: 220),
             labelHere.heightAnchor.constraint(equalToConstant: 22),
-            labelHere.topAnchor.constraint(equalTo: self.topAnchor, constant: 20),
-            labelHere.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)
+            labelHere.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 20),
+            labelHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20)
         ])
     }
     
@@ -72,7 +72,7 @@ class HabitTableViewCell: UITableViewCell {
             labelHere.widthAnchor.constraint(equalToConstant: 220),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
             labelHere.topAnchor.constraint(equalTo: habitcellTitle.bottomAnchor, constant: 4),
-            labelHere.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)
+            labelHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20)
         ])
     }
     
@@ -87,32 +87,43 @@ class HabitTableViewCell: UITableViewCell {
             labelHere.widthAnchor.constraint(equalToConstant: 188),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
             labelHere.topAnchor.constraint(equalTo: cellSubtitle.bottomAnchor, constant: 30),
-            labelHere.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -20),
-            labelHere.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)
+            labelHere.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -20),
+            labelHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20)
         ])
     }
     
-    func checkmarkSetup(imageViewHere: UIImageView){
-        imageViewHere.backgroundColor = .white
-        imageViewHere.layer.borderColor = UIColor(red: 1.00, green: 0.62, blue: 0.31, alpha: 1.00).cgColor
-        imageViewHere.layer.borderWidth = 2
-        imageViewHere.layer.cornerRadius = 19
-        
+    func checkmarkSetup(viewHere: UIView){
+        viewHere.backgroundColor = .white
+        viewHere.layer.borderColor = UIColor(red: 1.00, green: 0.62, blue: 0.31, alpha: 1.00).cgColor
+        viewHere.layer.borderWidth = 2
+        viewHere.layer.cornerRadius = 19
+        viewHere.isUserInteractionEnabled = true
+        //Add gesture
+        let gesture:UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(checkmarkAction))
+        gesture.numberOfTapsRequired = 1
+        viewHere.addGestureRecognizer(gesture)
     }
     
-    func checkmarkSetupLayout(imageViewHere: UIImageView){
-        imageViewHere.translatesAutoresizingMaskIntoConstraints = false
+    @objc func checkmarkAction(){
+        //Colorify view on tap
+        print("AA")
+        checkMarkView.backgroundColor = UIColor(cgColor: checkMarkView.layer.borderColor!)
+        checkMarkMarkLabel.text = "✓"
+    }
+    
+    func checkmarkSetupLayout(viewHere: UIView){
+        viewHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageViewHere.widthAnchor.constraint(equalToConstant: 38),
-            imageViewHere.heightAnchor.constraint(equalToConstant: 38),
-            imageViewHere.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-            imageViewHere.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25)
+            viewHere.widthAnchor.constraint(equalToConstant: 38),
+            viewHere.heightAnchor.constraint(equalToConstant: 38),
+            viewHere.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
+            viewHere.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -25)
         ])
     }
     
     func checkmarkMarkSetup(labelhere: UILabel){
         labelhere.text = "✓"
-        labelhere.textColor = .black
+        labelhere.textColor = .white
         labelhere.textAlignment = .center
         
     }
@@ -127,5 +138,7 @@ class HabitTableViewCell: UITableViewCell {
             
         ])
     }
+    
+    
 
 }
