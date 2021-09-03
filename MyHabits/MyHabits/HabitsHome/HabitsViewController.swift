@@ -13,12 +13,21 @@ class HabitsViewController: UIViewController {
     let tableItemsView = UITableView()
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableItemsView.reloadData()
         navigationController?.setNavigationBarHidden(false, animated: false)
         addEverySubview()
         setupEverySubview()
         addTableViewElementsDelegateAndDataSource()
+        NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         // Do any additional setup after loading the view.
     }
+    
+    //NotificationCenter.default.addObserver(self, selector: #selector(doThisWhenNotify(notification:)), name: NSNotification.Name(rawValue: "load"), object: nil)
+    @objc func loadList(){
+            //load data here
+            self.tableItemsView.reloadData()
+        }
+    
     
     func addEverySubview(){
         self.view.addSubview(titleHeader)
@@ -114,11 +123,15 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
         60
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        1
+        HabitsStore.shared.habits.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HabitTableViewCell.cellId, for: indexPath) as! HabitTableViewCell
+        let storeofHabits = HabitsStore.shared.habits
+        cell.habitcellTitle.text = storeofHabits[indexPath.row].name
+        cell.habitcellTitle.textColor = storeofHabits[indexPath.row].color
+        cell.checkMarkView.layer.borderColor = storeofHabits[indexPath.row].color.cgColor
         return cell
     }
     

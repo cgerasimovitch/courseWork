@@ -82,6 +82,9 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
 
         hereProgressView.progressTintColor = UIColor(red: 0.63, green: 0.09, blue: 0.80, alpha: 1.00)
         hereProgressView.trackTintColor = UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.00)
+        
+        //Need to check
+        hereProgressView.progress = HabitsStore.shared.todayProgress
     }
     
     func progressviewSetupLayout(hereProgressView: UIProgressView){

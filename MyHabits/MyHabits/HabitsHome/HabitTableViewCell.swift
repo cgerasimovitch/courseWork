@@ -10,10 +10,11 @@ import UIKit
 class HabitTableViewCell: UITableViewCell {
     static let cellId = "HabitTableViewCell"
     //MARK: - Subviews list
-    let cellTitle = UILabel()
+    var habitcellTitle = UILabel()
     let cellSubtitle = UILabel()
     let cellCounterTitle = UILabel()
     let checkMarkView = UIImageView()
+    let checkMarkMarkLabel = UILabel()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -26,21 +27,24 @@ class HabitTableViewCell: UITableViewCell {
         }
     
     func addEverySubview(){
-        self.addSubview(cellTitle)
+        self.addSubview(habitcellTitle)
         self.addSubview(cellSubtitle)
         self.addSubview(cellCounterTitle)
         self.addSubview(checkMarkView)
+        checkMarkView.addSubview(checkMarkMarkLabel)
     }
     
     func setupEverySubview(){
-        titleSetup(labelHere: cellTitle)
-        titleSetupLayout(labelHere: cellTitle)
+        titleSetup(labelHere: habitcellTitle)
+        titleSetupLayout(labelHere: habitcellTitle)
         subtitleSetup(labelHere: cellSubtitle)
         subtitleSetupLayout(labelHere: cellSubtitle)
         counterTitleSetup(labelHere: cellCounterTitle)
         counterTitleSetupLayout(labelHere: cellCounterTitle)
         checkmarkSetup(imageViewHere: checkMarkView)
         checkmarkSetupLayout(imageViewHere: checkMarkView)
+        checkmarkMarkSetup(labelhere: checkMarkMarkLabel)
+        checkmarkMarkSetupLayout(labelHere: checkMarkMarkLabel)
     }
     
     
@@ -67,7 +71,7 @@ class HabitTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             labelHere.widthAnchor.constraint(equalToConstant: 220),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
-            labelHere.topAnchor.constraint(equalTo: cellTitle.bottomAnchor, constant: 4),
+            labelHere.topAnchor.constraint(equalTo: habitcellTitle.bottomAnchor, constant: 4),
             labelHere.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20)
         ])
     }
@@ -89,8 +93,11 @@ class HabitTableViewCell: UITableViewCell {
     }
     
     func checkmarkSetup(imageViewHere: UIImageView){
-        imageViewHere.backgroundColor = UIColor(red: 1.00, green: 0.62, blue: 0.31, alpha: 1.00)
+        imageViewHere.backgroundColor = .white
+        imageViewHere.layer.borderColor = UIColor(red: 1.00, green: 0.62, blue: 0.31, alpha: 1.00).cgColor
+        imageViewHere.layer.borderWidth = 2
         imageViewHere.layer.cornerRadius = 19
+        
     }
     
     func checkmarkSetupLayout(imageViewHere: UIImageView){
@@ -100,6 +107,24 @@ class HabitTableViewCell: UITableViewCell {
             imageViewHere.heightAnchor.constraint(equalToConstant: 38),
             imageViewHere.centerYAnchor.constraint(equalTo: self.centerYAnchor),
             imageViewHere.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -25)
+        ])
+    }
+    
+    func checkmarkMarkSetup(labelhere: UILabel){
+        labelhere.text = "✓"
+        labelhere.textColor = .black
+        labelhere.textAlignment = .center
+        
+    }
+    
+    func checkmarkMarkSetupLayout(labelHere: UILabel){
+        labelHere.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            labelHere.widthAnchor.constraint(equalToConstant: 33),
+            labelHere.heightAnchor.constraint(equalToConstant: 33),
+            labelHere.centerXAnchor.constraint(equalTo: checkMarkView.centerXAnchor),
+            labelHere.centerYAnchor.constraint(equalTo: checkMarkView.centerYAnchor)
+            
         ])
     }
 

@@ -37,17 +37,7 @@ class HabitViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func saveItem(){
-        if itemNameTextField.text != ""{
-        let newHabit = Habit(name: itemNameTextField.text!,
-                             date: chosenDate,
-                             color: itemColorView.backgroundColor!)
-        let store = HabitsStore.shared
-            store.habits.append(newHabit)}
-        else {
-            print("Empty Habit")
-            return}
-    }
+    
     func addEverySubview() {
         self.view.addSubview(itemNameHeader)
         self.view.addSubview(itemNameTextField)
@@ -182,17 +172,7 @@ class HabitViewController: UIViewController {
         datePickerHere.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         
     }
-    func fetchDate(){
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm"
-        let stringDate = formatter.string(from: itemDatePicker.date)
-        chosenDate = formatter.date(from: stringDate)!
-        print(stringDate)
-        print(chosenDate)
-    }
-    @objc func dateChanged(_ sender: UIDatePicker) {
-        fetchDate()
-    }
+    
     func itemDatePickerSetupLayout(datePickerHere: UIDatePicker){
         datePickerHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -203,13 +183,39 @@ class HabitViewController: UIViewController {
         ])
     }
     
+    func fetchDate(){
+        
+        let formatter = DateFormatter()
+        
+        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        
+        let stringDate = formatter.string(from: itemDatePicker.date)
+        
+        chosenDate = formatter.date(from: stringDate)!
+        print(type(of: stringDate))
+        print(type(of: chosenDate))
+        
+    }
+    @objc func dateChanged(_ sender: UIDatePicker) {
+        fetchDate()
+    }
+    
+    
     //MARK: - Saving Habit
-    @objc func saveHabit(name: String, date: Date, color: UIColor){
-    let newHabit = Habit(name: name,
-                         date: date,
-                         color: color)
-    let store = HabitsStore.shared
-        store.habits.append(newHabit)}
+    @objc func saveItem(){
+        if itemNameTextField.text != ""{
+        var newHabit = Habit(name: itemNameTextField.text!,
+                             date: chosenDate as Date,
+                             color: itemColorView.backgroundColor!)
+        let store = HabitsStore.shared
+            store.habits.append(newHabit)
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+            dismissViewController()
+        }
+        else {
+            print("Empty Habit")
+            return}
+    }
 
 }
 
