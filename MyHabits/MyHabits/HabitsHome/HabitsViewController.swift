@@ -78,6 +78,7 @@ class HabitsViewController: UIViewController {
     @objc func addNewItem(){
         let vc = HabitViewController()
         vc.screenNameContainer = "Создать"
+        vc.isNewHabit = true
         vc.itemColorView.backgroundColor = .white
         vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
         self.navigationController?.pushViewController(vc, animated: true)
@@ -128,12 +129,23 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HabitTableViewCell.cellId, for: indexPath) as! HabitTableViewCell
-        let storeofHabits = HabitsStore.shared.habits
-        cell.habitcellTitle.text = storeofHabits[indexPath.row].name
-        cell.habitcellTitle.textColor = storeofHabits[indexPath.row].color
-        cell.checkMarkView.layer.borderColor = storeofHabits[indexPath.row].color.cgColor
+        let storeOfHabits = HabitsStore.shared.habits
+        cell.habitcellTitle.text = storeOfHabits[indexPath.row].name
+        cell.habitcellTitle.textColor = storeOfHabits[indexPath.row].color
+        cell.checkMarkView.layer.borderColor = storeOfHabits[indexPath.row].color.cgColor
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = HabitViewController()
+        vc.screenNameContainer = "Править"
+        vc.isNewHabit = false
+        vc.leftTopItemName = ""
+        vc.itemColorView.backgroundColor = .white
+        vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
+        self.navigationController?.pushViewController(vc, animated: true)
+        print(indexPath)
+        
+    }
     
 }

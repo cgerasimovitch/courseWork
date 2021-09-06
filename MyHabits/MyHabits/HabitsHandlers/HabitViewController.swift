@@ -52,7 +52,8 @@ class HabitViewController: UIViewController {
         self.view.addSubview(itemTimeHeader)
         self.view.addSubview(itemCurrentTimeLabel)
         self.view.addSubview(itemDatePicker)
-        self.view.addSubview(deleteButton)
+        if isNewHabit == false{
+            self.view.addSubview(deleteButton)}
     }
     
     func setupEverySubview() {
@@ -70,8 +71,9 @@ class HabitViewController: UIViewController {
         itemCurrentTimeLabelSetupLayout(labelHere: itemCurrentTimeLabel)
         itemDatePickerSetup(datePickerHere: itemDatePicker)
         itemDatePickerSetupLayout(datePickerHere: itemDatePicker)
+        if isNewHabit == false{
         buttonDeleteSetup(buttonHere: deleteButton)
-        buttonDeleteSetupLayout(buttonHere: deleteButton)
+            buttonDeleteSetupLayout(buttonHere: deleteButton)}
     }
     // MARK: - Setup every subview
     func itemNameHeaderSetup(labelHere: UILabel){

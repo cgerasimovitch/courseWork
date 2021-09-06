@@ -58,6 +58,21 @@
             </objects>
             <point key="canvasLocation" x="1700.0000000000002" y="414.50892857142856"/>
         </scene>
+        <!--Habit Details View Controller-->
+        <scene sceneID="ol9-UX-Q0x">
+            <objects>
+                <viewController id="VHz-Xh-iep" customClass="HabitDetailsViewController" customModule="MyHabits" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="5Kt-VY-4xD">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="mue-bz-Kow"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iHa-v3-dR7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2419" y="-8"/>
+        </scene>
         <!--HabitItemViewController-->
         <scene sceneID="r8m-Qi-VnF">
             <objects>
@@ -72,7 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqH-r4-da1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2473.913043478261" y="-352.23214285714283"/>
+            <point key="canvasLocation" x="2516" y="-655"/>
         </scene>
         <!--Привычки-->
         <scene sceneID="MfE-WU-6RC">
