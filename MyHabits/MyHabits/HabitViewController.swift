@@ -17,14 +17,20 @@ class HabitViewController: UIViewController {
     let itemCurrentTimeLabel = UILabel()
     let itemDatePicker = UIDatePicker()
     var chosenDate = Date()
+    let deleteButton = UIButton()
     var screenNameContainer = ""
+    var isNewHabit = true
+    var leftTopItemName = "Отменить"
+    var rightTopItemName = "Сохранить"
+    var habitName = ""
+    
     override func viewDidLoad() {
         self.view.backgroundColor = .white
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         super.viewDidLoad()
         title = screenNameContainer
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Отменить", style: .plain, target: self, action: #selector(dismissViewController))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Сохранить", style: .plain, target: self, action: #selector(saveItem))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: leftTopItemName, style: .plain, target: self, action: #selector(dismissViewController))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveItem))
         fetchDate()
     }
     
@@ -46,6 +52,7 @@ class HabitViewController: UIViewController {
         self.view.addSubview(itemTimeHeader)
         self.view.addSubview(itemCurrentTimeLabel)
         self.view.addSubview(itemDatePicker)
+        self.view.addSubview(deleteButton)
     }
     
     func setupEverySubview() {
@@ -63,6 +70,8 @@ class HabitViewController: UIViewController {
         itemCurrentTimeLabelSetupLayout(labelHere: itemCurrentTimeLabel)
         itemDatePickerSetup(datePickerHere: itemDatePicker)
         itemDatePickerSetupLayout(datePickerHere: itemDatePicker)
+        buttonDeleteSetup(buttonHere: deleteButton)
+        buttonDeleteSetupLayout(buttonHere: deleteButton)
     }
     // MARK: - Setup every subview
     func itemNameHeaderSetup(labelHere: UILabel){
@@ -183,17 +192,49 @@ class HabitViewController: UIViewController {
         ])
     }
     
+    
+    func buttonDeleteSetup(buttonHere: UIButton){
+        buttonHere.setTitle("Удалить привычку", for: .normal)
+        buttonHere.setTitleColor(.red, for: .normal)
+        buttonHere.addTarget(self, action: #selector(deleteShowAlert), for: .touchUpInside)
+    }
+    
+    @objc func deleteShowAlert(){
+        let alertController = UIAlertController(title: "Удалить привычку", message: "Вы хотите удалить привычку \(habitName)?", preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Отмена", style: .default) { _ in
+            print("Отмена")
+        }
+        let deleteAction = UIAlertAction(title: "Удалить", style: .destructive) {_ in 
+            self.deleteItem()
+        }
+        alertController.addAction(cancelAction)
+        alertController.addAction(deleteAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func deleteItem() {
+        print("Удаление началось")
+        }
+    
+    
+    
+    func buttonDeleteSetupLayout(buttonHere: UIButton){
+        buttonHere.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            buttonHere.widthAnchor.constraint(equalToConstant: 420),
+            buttonHere.heightAnchor.constraint(equalToConstant: 22),
+            buttonHere.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -18),
+            buttonHere.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor)
+        ])}
+    
+        
+    
     func fetchDate(){
         
         let formatter = DateFormatter()
-        
         formatter.dateFormat = "yyyy-MM-dd HH:mm"
-        
         let stringDate = formatter.string(from: itemDatePicker.date)
-        
         chosenDate = formatter.date(from: stringDate)!
-        print(type(of: stringDate))
-        print(type(of: chosenDate))
         
     }
     @objc func dateChanged(_ sender: UIDatePicker) {
