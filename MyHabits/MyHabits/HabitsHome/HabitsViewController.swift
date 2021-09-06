@@ -137,14 +137,13 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = HabitViewController()
-        vc.screenNameContainer = "Править"
-        vc.isNewHabit = false
-        vc.leftTopItemName = ""
-        vc.itemColorView.backgroundColor = .white
+        let storeOfHabits = HabitsStore.shared.habits
+        let vc = HabitDetailsViewController()
+        vc.screenNameContainer = storeOfHabits[indexPath.row].name
+        vc.leftTopItemName = self.titleHeader.text!
+        vc.view.backgroundColor = .white
         vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
         self.navigationController?.pushViewController(vc, animated: true)
-        print(indexPath)
         
     }
     

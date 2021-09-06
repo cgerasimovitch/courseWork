@@ -8,22 +8,26 @@
 import UIKit
 
 class HabitDetailsViewController: UIViewController {
-
+    var screenNameContainer = ""
+    var leftTopItemName = ""
+    var rightTopItemName = "Править"
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        title = screenNameContainer
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: leftTopItemName, style: .plain, target: self, action: #selector(dismissViewController))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveEditedItem))
         // Do any additional setup after loading the view.
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+   
+    @objc func dismissViewController(){
+        self.navigationController?.popViewController(animated: true)
     }
-    */
-
+    
+    @objc func saveEditedItem(){
+        print("Сохранение началось")
+    }
 }

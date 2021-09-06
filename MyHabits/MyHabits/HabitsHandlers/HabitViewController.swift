@@ -25,9 +25,9 @@ class HabitViewController: UIViewController {
     var habitName = ""
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         self.view.backgroundColor = .white
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        super.viewDidLoad()
         title = screenNameContainer
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: leftTopItemName, style: .plain, target: self, action: #selector(dismissViewController))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveItem))
