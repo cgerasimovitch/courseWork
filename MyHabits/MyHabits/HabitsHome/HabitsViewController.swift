@@ -11,20 +11,22 @@ class HabitsViewController: UIViewController {
     let titleHeader = UILabel()
     let buttonAdd = UIButton()
     let tableItemsView = UITableView()
+    var indexToHold = 0
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         tableItemsView.reloadData()
         navigationController?.setNavigationBarHidden(false, animated: false)
         addEverySubview()
         setupEverySubview()
         addTableViewElementsDelegateAndDataSource()
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
-        // Do any additional setup after loading the view.
+        
     }
     
-    //NotificationCenter.default.addObserver(self, selector: #selector(doThisWhenNotify(notification:)), name: NSNotification.Name(rawValue: "load"), object: nil)
+   
     @objc func loadList(){
-            //load data here
+            
             self.tableItemsView.reloadData()
         }
     
@@ -80,6 +82,7 @@ class HabitsViewController: UIViewController {
         vc.screenNameContainer = "Создать"
         vc.isNewHabit = true
         vc.itemColorView.backgroundColor = .white
+        
         vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
         self.navigationController?.pushViewController(vc, animated: true)
         
@@ -133,15 +136,17 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.habitcellTitle.text = storeOfHabits[indexPath.row].name
         cell.habitcellTitle.textColor = storeOfHabits[indexPath.row].color
         cell.checkMarkView.layer.borderColor = storeOfHabits[indexPath.row].color.cgColor
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storeOfHabits = HabitsStore.shared.habits
         let vc = HabitDetailsViewController()
-        vc.screenNameContainer = storeOfHabits[indexPath.row].name
         vc.leftTopItemName = self.titleHeader.text!
-        vc.view.backgroundColor = .white
+        vc.screenNameContainer = storeOfHabits[indexPath.row].name
+        
+        vc.indexToTransport = indexPath.row
         vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
         self.navigationController?.pushViewController(vc, animated: true)
         

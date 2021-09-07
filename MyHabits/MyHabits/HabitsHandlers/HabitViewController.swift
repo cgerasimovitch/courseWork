@@ -9,6 +9,7 @@ import UIKit
 
 class HabitViewController: UIViewController {
 
+    var indexToEdit = 0
     let itemNameHeader = UILabel()
     let itemNameTextField = UITextField()
     let itemColorHeader = UILabel()
@@ -23,15 +24,21 @@ class HabitViewController: UIViewController {
     var leftTopItemName = "Отменить"
     var rightTopItemName = "Сохранить"
     var habitName = ""
+    let store = HabitsStore.shared
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        title = screenNameContainer
         self.view.backgroundColor = .white
         self.navigationController?.setNavigationBarHidden(false, animated: false)
-        title = screenNameContainer
+        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: leftTopItemName, style: .plain, target: self, action: #selector(dismissViewController))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveItem))
-        fetchDate()
+        if isNewHabit == true{
+            fetchDate()}
+       
     }
     
     override func viewWillLayoutSubviews() {
@@ -119,7 +126,7 @@ class HabitViewController: UIViewController {
     }
     
     func itemColorViewSetup(viewHere: UIView){
-        viewHere.backgroundColor = UIColor(red: 1.00, green: 0.62, blue: 0.31, alpha: 1.00)
+        viewHere.backgroundColor = store.habits[indexToEdit].color
         viewHere.layer.cornerRadius = 15
         viewHere.isUserInteractionEnabled = true
         //Add gesture
@@ -180,6 +187,8 @@ class HabitViewController: UIViewController {
     func itemDatePickerSetup(datePickerHere: UIDatePicker){
         datePickerHere.datePickerMode = .time
         datePickerHere.preferredDatePickerStyle = .wheels
+        datePickerHere.date = chosenDate
+        
         datePickerHere.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         
     }
@@ -215,7 +224,12 @@ class HabitViewController: UIViewController {
     }
     
     func deleteItem() {
-        print("Удаление началось")
+        store.habits.remove(at: indexToEdit)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+        let vc = HabitsViewController()
+        vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
+        self.navigationController?.pushViewController(vc, animated: true)
+        
         }
     
     
@@ -250,8 +264,8 @@ class HabitViewController: UIViewController {
         var newHabit = Habit(name: itemNameTextField.text!,
                              date: chosenDate as Date,
                              color: itemColorView.backgroundColor!)
-        let store = HabitsStore.shared
-            store.habits.append(newHabit)
+        
+            self.store.habits.append(newHabit)
             NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
             dismissViewController()
         }
