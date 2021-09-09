@@ -47,7 +47,10 @@ class HabitViewController: UIViewController {
     }
     
     @objc func dismissViewController(){
-        self.navigationController?.popViewController(animated: true)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
+        let vc = HabitsViewController()
+        vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -225,10 +228,7 @@ class HabitViewController: UIViewController {
     
     func deleteItem() {
         store.habits.remove(at: indexToEdit)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
-        let vc = HabitsViewController()
-        vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
-        self.navigationController?.pushViewController(vc, animated: true)
+        dismissViewController()
         
         }
     
@@ -243,7 +243,24 @@ class HabitViewController: UIViewController {
             buttonHere.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor)
         ])}
     
-        
+    @objc func saveItem(){
+       
+        if itemNameTextField.text != ""{
+        var newHabit = Habit(name: itemNameTextField.text!,
+                             date: chosenDate as Date,
+                             color: itemColorView.backgroundColor!)
+            if isNewHabit == true {
+                self.store.habits.append(newHabit)}
+            else{
+                self.store.habits.remove(at: indexToEdit)
+                self.store.habits.insert(newHabit, at: indexToEdit)
+            }
+            dismissViewController()
+        }
+        else {
+            print("Empty Habit")
+            return}
+    }
     
     func fetchDate(){
         
@@ -259,20 +276,7 @@ class HabitViewController: UIViewController {
     
     
     //MARK: - Saving Habit
-    @objc func saveItem(){
-        if itemNameTextField.text != ""{
-        var newHabit = Habit(name: itemNameTextField.text!,
-                             date: chosenDate as Date,
-                             color: itemColorView.backgroundColor!)
-        
-            self.store.habits.append(newHabit)
-            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
-            dismissViewController()
-        }
-        else {
-            print("Empty Habit")
-            return}
-    }
+   
 
 }
 
