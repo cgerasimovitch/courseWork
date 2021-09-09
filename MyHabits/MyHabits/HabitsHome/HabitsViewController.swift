@@ -14,12 +14,12 @@ class HabitsViewController: UIViewController {
     var indexToHold = 0
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
+        view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.00)
         tableItemsView.reloadData()
         navigationController?.setNavigationBarHidden(false, animated: false)
         addEverySubview()
         setupEverySubview()
-        addTableViewElementsDelegateAndDataSource()
+        addTableViewElementsDelegateAndDataSource(tableHere: tableItemsView)
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
         
     }
@@ -47,11 +47,11 @@ class HabitsViewController: UIViewController {
         tableItemsSetupLayout(tableHere: tableItemsView)
     }
     
-    func addTableViewElementsDelegateAndDataSource(){
-        tableItemsView.delegate = self
-        tableItemsView.dataSource = self
-        tableItemsView.register(HabitsViewHeaderView.self, forHeaderFooterViewReuseIdentifier: HabitsViewHeaderView().headerId)
-        tableItemsView.register(HabitTableViewCell.self, forCellReuseIdentifier: HabitTableViewCell.cellId)
+    func addTableViewElementsDelegateAndDataSource(tableHere: UITableView){
+        tableHere.delegate = self
+        tableHere.dataSource = self
+        tableHere.register(HabitsViewHeaderView.self, forHeaderFooterViewReuseIdentifier: HabitsViewHeaderView().headerId)
+        tableHere.register(HabitTableViewCell.self, forCellReuseIdentifier: HabitTableViewCell.cellId)
     }
     // MARK: - Setup every subview
     
@@ -106,10 +106,11 @@ class HabitsViewController: UIViewController {
         tableHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             tableHere.topAnchor.constraint(equalTo: titleHeader.bottomAnchor, constant: 7.5),
-            tableHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 1),
-            tableHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -1),
+            tableHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 17),
+            tableHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -17),
             tableHere.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
         ])
+        
     }
     
     

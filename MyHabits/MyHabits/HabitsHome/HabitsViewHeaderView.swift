@@ -17,7 +17,8 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = .white
+        self.contentView.backgroundColor = .white
+        self.contentView.layer.cornerRadius = 10
         addEverySubview()
         setupEverySubview()
         
@@ -64,6 +65,7 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
     
     func inspireProgressHeaderSetup(labelHere: UILabel){
         labelHere.text = "50%"
+        labelHere.textAlignment = .right
         labelHere.font = UIFont(name: "SF Pro Display-Semibold", size: 20)
         labelHere.textColor = .systemGray2
     }
@@ -74,7 +76,7 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
             labelHere.widthAnchor.constraint(equalToConstant: 95),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
             labelHere.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
-            labelHere.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12)
+            labelHere.trailingAnchor.constraint(equalTo: inspireProgressView.trailingAnchor)
         ])
     }
     //https://www.uicolor.io/

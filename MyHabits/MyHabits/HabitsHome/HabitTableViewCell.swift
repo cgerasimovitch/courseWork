@@ -16,6 +16,7 @@ class HabitTableViewCell: UITableViewCell {
     let checkMarkView = UIView()
     let checkMarkMarkLabel = UILabel()
     
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addEverySubview()
@@ -47,6 +48,7 @@ class HabitTableViewCell: UITableViewCell {
         checkmarkMarkSetupLayout(labelHere: checkMarkMarkLabel)
     }
     
+   
     
     // MARK: - Setup every subview
     func titleSetup(labelHere: UILabel){
