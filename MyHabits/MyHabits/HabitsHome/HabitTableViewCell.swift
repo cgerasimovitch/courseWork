@@ -116,9 +116,12 @@ class HabitTableViewCell: UITableViewCell {
         checkMarkView.backgroundColor = UIColor(cgColor: checkMarkView.layer.borderColor!)
         checkMarkMarkLabel.text = "✓"
         habitsStore.track(habitsStore.habits[habitTableViewCellIndex])
-        tableHeader.updateProgressView()
+        
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
         }
+        
         else {return}
+        
     }
     
     func checkmarkSetupLayout(viewHere: UIView){

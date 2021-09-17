@@ -11,9 +11,9 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
 
     let headerId = "HabitsViewHeaderView"
     let inspireHeader = UILabel()
-    let inspireProgressHeader = UILabel()
-    let inspireProgressView = UIProgressView()
-   
+    var inspireProgressHeader = UILabel()
+    var inspireProgressView = UIProgressView()
+    lazy var store = HabitsStore.shared
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
@@ -64,7 +64,7 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
     }
     
     func inspireProgressHeaderSetup(labelHere: UILabel){
-        labelHere.text = "50%"
+        labelHere.text = "\(String(format:"%.2f", store.todayProgress*100))%"
         labelHere.textAlignment = .right
         labelHere.font = UIFont(name: "SF Pro Display-Semibold", size: 20)
         labelHere.textColor = .systemGray2
@@ -100,7 +100,8 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
     }
     
     func updateProgressView(){
-        inspireProgressView.progress = HabitsStore.shared.todayProgress
+        inspireProgressView.progress = store.todayProgress
+        print(store.todayProgress)
     }
 
 }

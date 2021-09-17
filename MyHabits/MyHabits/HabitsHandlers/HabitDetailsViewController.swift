@@ -104,10 +104,8 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailsCellTableViewCell.cellId, for: indexPath) as! DetailsCellTableViewCell
         
         
-        cell.datecellTitle.text = dateFormatter.string(from: store.habits[indexToTransport].trackDates[indexPath.row])
-            
-            
-        
+        cell.datecellTitle.text =
+            dateFormatter.string(from: store.habits[indexToTransport].trackDates.reversed()[indexPath.row])
         return cell
     }
     
