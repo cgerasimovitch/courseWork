@@ -12,6 +12,7 @@ class HabitsViewController: UIViewController {
     let buttonAdd = UIButton()
     let tableItemsView = UITableView()
     var indexToHold = 0
+    let storeOfHabits = HabitsStore.shared
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.00)
@@ -121,6 +122,8 @@ class HabitsViewController: UIViewController {
 extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HabitsViewHeaderView().headerId) as! HabitsViewHeaderView
+        headerView.inspireProgressHeader.text = "\(Int(storeOfHabits.todayProgress*100))%"
+        headerView.inspireProgressView.progress = storeOfHabits.todayProgress
         return headerView
     }
     
@@ -133,8 +136,8 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HabitTableViewCell.cellId, for: indexPath) as! HabitTableViewCell
-        let storeOfHabits = HabitsStore.shared.habits
-        var store = storeOfHabits[indexPath.row]
+        
+        var store = storeOfHabits.habits[indexPath.row]
         cell.habitcellTitle.text = store.name
         cell.cellSubtitle.text = store.dateString
         cell.cellCounterTitle.text = "Счётчик: \(String(store.trackDates.count))"

@@ -21,7 +21,7 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
         self.contentView.layer.cornerRadius = 10
         addEverySubview()
         setupEverySubview()
-        updateProgressView()
+
        }
     
     required init?(coder: NSCoder) {
@@ -64,7 +64,7 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
     }
     
     func inspireProgressHeaderSetup(labelHere: UILabel){
-        labelHere.text = "\(String(format:"%.2f", store.todayProgress*100))%"
+        
         labelHere.textAlignment = .right
         labelHere.font = UIFont(name: "SF Pro Display-Semibold", size: 20)
         labelHere.textColor = .systemGray2
@@ -79,7 +79,6 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
             labelHere.trailingAnchor.constraint(equalTo: inspireProgressView.trailingAnchor)
         ])
     }
-    //https://www.uicolor.io/
     func progressviewSetup(hereProgressView: UIProgressView){
 
         hereProgressView.progressTintColor = UIColor(red: 0.63, green: 0.09, blue: 0.80, alpha: 1.00)
@@ -99,9 +98,4 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
         ])
     }
     
-    func updateProgressView(){
-        inspireProgressView.progress = store.todayProgress
-        print(store.todayProgress)
-    }
-
 }
