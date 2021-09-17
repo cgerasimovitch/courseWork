@@ -95,7 +95,8 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailsCellTableViewCell.cellId, for: indexPath) as! DetailsCellTableViewCell
-        cell.datecellTitle.text = "Сегодня"
+        //cell.datecellTitle.text = store.habits[indexPath.row].trackDates[]
+        
         
         return cell
     }

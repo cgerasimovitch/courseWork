@@ -15,12 +15,14 @@ class HabitTableViewCell: UITableViewCell {
     let cellCounterTitle = UILabel()
     let checkMarkView = UIView()
     let checkMarkMarkLabel = UILabel()
-    
+    let habitsStore = HabitsStore.shared
+    var habitTableViewCellIndex = 0 as Int
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         addEverySubview()
         setupEverySubview()
+        habitTableViewCellIndex = 0
         }
         
         required init?(coder: NSCoder) {
@@ -107,10 +109,12 @@ class HabitTableViewCell: UITableViewCell {
     }
     
     @objc func checkmarkAction(){
-        //Colorify view on tap
-        print("AA")
+        if habitsStore.habits[habitTableViewCellIndex].isAlreadyTakenToday == false{
+            
         checkMarkView.backgroundColor = UIColor(cgColor: checkMarkView.layer.borderColor!)
         checkMarkMarkLabel.text = "✓"
+            habitsStore.track(habitsStore.habits[habitTableViewCellIndex])}
+        else {return}
     }
     
     func checkmarkSetupLayout(viewHere: UIView){

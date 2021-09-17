@@ -137,6 +137,10 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.habitcellTitle.text = storeOfHabits[indexPath.row].name
         cell.habitcellTitle.textColor = storeOfHabits[indexPath.row].color
         cell.checkMarkView.layer.borderColor = storeOfHabits[indexPath.row].color.cgColor
+        cell.habitTableViewCellIndex = indexPath.row
+        if storeOfHabits[indexPath.row].isAlreadyTakenToday == true{
+            cell.checkMarkView.backgroundColor = UIColor(cgColor: cell.checkMarkView.layer.borderColor!)
+            cell.checkMarkMarkLabel.text = "✓"}
         
         return cell
     }
