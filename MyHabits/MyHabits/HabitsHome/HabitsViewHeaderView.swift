@@ -21,7 +21,7 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
         self.contentView.layer.cornerRadius = 10
         addEverySubview()
         setupEverySubview()
-        
+        updateProgressView()
        }
     
     required init?(coder: NSCoder) {
@@ -85,8 +85,6 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
         hereProgressView.progressTintColor = UIColor(red: 0.63, green: 0.09, blue: 0.80, alpha: 1.00)
         hereProgressView.trackTintColor = UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.00)
         
-        //Need to check
-        hereProgressView.progress = HabitsStore.shared.todayProgress
     }
     
     func progressviewSetupLayout(hereProgressView: UIProgressView){
@@ -99,6 +97,10 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
             hereProgressView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 12),
             hereProgressView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -12)
         ])
+    }
+    
+    func updateProgressView(){
+        inspireProgressView.progress = HabitsStore.shared.todayProgress
     }
 
 }

@@ -134,11 +134,14 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HabitTableViewCell.cellId, for: indexPath) as! HabitTableViewCell
         let storeOfHabits = HabitsStore.shared.habits
-        cell.habitcellTitle.text = storeOfHabits[indexPath.row].name
-        cell.habitcellTitle.textColor = storeOfHabits[indexPath.row].color
-        cell.checkMarkView.layer.borderColor = storeOfHabits[indexPath.row].color.cgColor
+        var store = storeOfHabits[indexPath.row]
+        cell.habitcellTitle.text = store.name
+        cell.cellSubtitle.text = store.dateString
+        cell.cellCounterTitle.text = "Счётчик: \(String(store.trackDates.count))"
+        cell.habitcellTitle.textColor = store.color
+        cell.checkMarkView.layer.borderColor = store.color.cgColor
         cell.habitTableViewCellIndex = indexPath.row
-        if storeOfHabits[indexPath.row].isAlreadyTakenToday == true{
+        if store.isAlreadyTakenToday == true {
             cell.checkMarkView.backgroundColor = UIColor(cgColor: cell.checkMarkView.layer.borderColor!)
             cell.checkMarkMarkLabel.text = "✓"}
         

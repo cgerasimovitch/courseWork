@@ -14,6 +14,13 @@ class HabitDetailsViewController: UIViewController {
     var indexToTransport = 0
     let store = HabitsStore.shared
     let datesTable = UITableView()
+    private lazy var dateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ru_RU")
+        formatter.timeStyle = .short
+        return formatter
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -95,8 +102,11 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailsCellTableViewCell.cellId, for: indexPath) as! DetailsCellTableViewCell
-        //cell.datecellTitle.text = store.habits[indexPath.row].trackDates[]
+        /*cell.datecellTitle.text = dateFormatter.string(from: store.habits[indexToTransport].trackDates[indexPath.row])*/
         
+        cell.datecellTitle.text =  store.habits[indexToTransport].dateString
+            
+            
         
         return cell
     }

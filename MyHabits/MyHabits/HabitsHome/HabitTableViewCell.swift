@@ -9,13 +9,15 @@ import UIKit
 
 class HabitTableViewCell: UITableViewCell {
     static let cellId = "HabitTableViewCell"
+    let habitsStore = HabitsStore.shared
+    let tableHeader = HabitsViewHeaderView()
     //MARK: - Subviews list
     var habitcellTitle = UILabel()
-    let cellSubtitle = UILabel()
-    let cellCounterTitle = UILabel()
+    var cellSubtitle = UILabel()
+    var cellCounterTitle = UILabel()
     let checkMarkView = UIView()
     let checkMarkMarkLabel = UILabel()
-    let habitsStore = HabitsStore.shared
+   
     var habitTableViewCellIndex = 0 as Int
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -113,7 +115,9 @@ class HabitTableViewCell: UITableViewCell {
             
         checkMarkView.backgroundColor = UIColor(cgColor: checkMarkView.layer.borderColor!)
         checkMarkMarkLabel.text = "✓"
-            habitsStore.track(habitsStore.habits[habitTableViewCellIndex])}
+        habitsStore.track(habitsStore.habits[habitTableViewCellIndex])
+        tableHeader.updateProgressView()
+        }
         else {return}
     }
     
