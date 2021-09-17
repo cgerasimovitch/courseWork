@@ -144,7 +144,9 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
         if store.isAlreadyTakenToday == true {
             cell.checkMarkView.backgroundColor = UIColor(cgColor: cell.checkMarkView.layer.borderColor!)
             cell.checkMarkMarkLabel.text = "✓"}
-        
+        else{ cell.checkMarkView.backgroundColor = .white
+            cell.checkMarkMarkLabel.text = ""
+        }
         return cell
     }
     

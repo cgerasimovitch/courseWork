@@ -17,7 +17,7 @@ class HabitDetailsViewController: UIViewController {
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ru_RU")
-        formatter.timeStyle = .short
+        formatter.dateFormat = "dd-MM-yyyy"
         return formatter
     }()
     
@@ -97,14 +97,14 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
         60
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        HabitsStore.shared.habits.count
+        store.habits[indexToTransport].trackDates.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailsCellTableViewCell.cellId, for: indexPath) as! DetailsCellTableViewCell
-        /*cell.datecellTitle.text = dateFormatter.string(from: store.habits[indexToTransport].trackDates[indexPath.row])*/
         
-        cell.datecellTitle.text =  store.habits[indexToTransport].dateString
+        
+        cell.datecellTitle.text = dateFormatter.string(from: store.habits[indexToTransport].trackDates[indexPath.row])
             
             
         
