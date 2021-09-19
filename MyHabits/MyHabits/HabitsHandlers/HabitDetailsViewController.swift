@@ -14,6 +14,8 @@ class HabitDetailsViewController: UIViewController {
     var indexToTransport = 0
     let store = HabitsStore.shared
     let datesTable = UITableView()
+    var trackedDate = [Date]()
+    
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ru_RU")
@@ -29,7 +31,7 @@ class HabitDetailsViewController: UIViewController {
         addTableViewElementsDelegateAndDataSource(tableHere: datesTable)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: leftTopItemName, style: .plain, target: self, action: #selector(dismissViewController))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveEditedItem))
-        
+        trackedDate = store.habits[indexToTransport].trackDates.reversed()
         
     }
     
@@ -104,8 +106,19 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailsCellTableViewCell.cellId, for: indexPath) as! DetailsCellTableViewCell
         
         
-        cell.datecellTitle.text =
-            dateFormatter.string(from: store.habits[indexToTransport].trackDates.reversed()[indexPath.row])
+        
+        if Calendar.current.isDateInToday(trackedDate[indexPath.row]){
+            cell.datecellTitle.text = "Сегодня"
+        }
+        
+        else if Calendar.current.isDateInYesterday(trackedDate[indexPath.row]){
+            cell.datecellTitle.text = "Вчера"
+        }
+        else { cell.datecellTitle.text =
+            dateFormatter.string(from: trackedDate[indexPath.row])}
+            
+        
+       
         return cell
     }
     
