@@ -25,6 +25,7 @@ class HabitViewController: UIViewController {
     var rightTopItemName = "Сохранить"
     var habitName = ""
     let store = HabitsStore.shared
+    var everydayString = ""
     
     
     override func viewDidLoad() {
@@ -38,7 +39,13 @@ class HabitViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveItem))
         if isNewHabit == true{
             fetchDate()}
-       
+        else{
+            let formatter = DateFormatter()
+            formatter.locale = Locale(identifier: "ru_RU")
+            formatter.dateStyle = .none
+            formatter.timeStyle = .short
+            everydayString = formatter.string(from: chosenDate)
+        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -103,8 +110,8 @@ class HabitViewController: UIViewController {
     
     func itemNameTextFieldSetup(textFieldHere: UITextField){
         textFieldHere.placeholder = "Бегать по утрам, спать 8 часов и т.п."
-        textFieldHere.font = UIFont.systemFont(ofSize: 17, wight: UIFont.Weight.regular)
-        textFieldHere.textColor = .systemGray2
+        textFieldHere.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.regular)
+        textFieldHere.textColor = .black
     }
     
     func itemNameTextFieldSetupLayout(textFieldHere: UITextField){
@@ -181,7 +188,7 @@ class HabitViewController: UIViewController {
     }
     
     func itemCurrentTimeLabelSetup(labelHere: UILabel){
-        
+        labelHere.text = "Каждый день в \(everydayString)"
     }
     func itemCurrentTimeLabelSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
@@ -189,7 +196,8 @@ class HabitViewController: UIViewController {
             labelHere.widthAnchor.constraint(equalToConstant: 194),
             labelHere.heightAnchor.constraint(equalToConstant: 22),
             labelHere.topAnchor.constraint(equalTo: itemTimeHeader.bottomAnchor, constant: 7),
-            labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+            labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            labelHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 16)
         ])
     }
     func itemDatePickerSetup(datePickerHere: UIDatePicker){
@@ -271,9 +279,13 @@ class HabitViewController: UIViewController {
     func fetchDate(){
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm"
+        formatter.locale = Locale(identifier: "ru_RU")
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
         let stringDate = formatter.string(from: itemDatePicker.date)
+        everydayString = stringDate
         chosenDate = formatter.date(from: stringDate)!
+        itemCurrentTimeLabelSetup(labelHere: itemCurrentTimeLabel)
         
     }
     @objc func dateChanged(_ sender: UIDatePicker) {
