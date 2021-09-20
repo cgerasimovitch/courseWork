@@ -188,7 +188,16 @@ class HabitViewController: UIViewController {
     }
     
     func itemCurrentTimeLabelSetup(labelHere: UILabel){
-        labelHere.text = "Каждый день в \(everydayString)"
+        
+        let mainString = "Каждый день в \(everydayString) "
+        let stringToColor = "\(everydayString)"
+        let range = (mainString as NSString).range(of: stringToColor)
+        let mutableAttributedString = NSMutableAttributedString.init(string: mainString)
+        let fontColor = itemColorView.backgroundColor
+        mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: fontColor, range: range)
+        labelHere.attributedText = mutableAttributedString
+       
+        
     }
     func itemCurrentTimeLabelSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
