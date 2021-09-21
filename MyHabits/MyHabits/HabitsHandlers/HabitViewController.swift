@@ -88,6 +88,7 @@ class HabitViewController: UIViewController {
     // MARK: - Setup every subview
     func itemNameHeaderSetup(labelHere: UILabel){
         labelHere.text = "НАЗВАНИЕ"
+        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.semibold)
     }
     
     func itemNameHeaderSetupLayout(labelHere: UILabel){
@@ -102,6 +103,8 @@ class HabitViewController: UIViewController {
     
     func itemNameTextFieldSetup(textFieldHere: UITextField){
         textFieldHere.placeholder = "Бегать по утрам, спать 8 часов и т.п."
+        textFieldHere.font = UIFont.systemFont(ofSize: 17, wight: UIFont.Weight.regular)
+        textFieldHere.textColor = .systemGray2
     }
     
     func itemNameTextFieldSetupLayout(textFieldHere: UITextField){
@@ -116,6 +119,7 @@ class HabitViewController: UIViewController {
     
     func itemColorHeaderSetup(labelHere: UILabel){
         labelHere.text = "ЦВЕТ"
+        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.semibold)
     }
     
     func itemColorHeaderSetupLayout(labelHere: UILabel){
@@ -164,6 +168,7 @@ class HabitViewController: UIViewController {
     
     func itemTimeHeaderSetup(labelHere: UILabel){
         labelHere.text = "ВРЕМЯ"
+        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.semibold)
     }
     func itemTimeHeaderSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
@@ -209,8 +214,9 @@ class HabitViewController: UIViewController {
     
     func buttonDeleteSetup(buttonHere: UIButton){
         buttonHere.setTitle("Удалить привычку", for: .normal)
-        buttonHere.setTitleColor(.red, for: .normal)
+        buttonHere.setTitleColor(UIColor(red: 1.00, green: 0.23, blue: 0.19, alpha: 1.00), for: .normal)
         buttonHere.addTarget(self, action: #selector(deleteShowAlert), for: .touchUpInside)
+        buttonHere.titleLabel?.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.regular)
     }
     
     @objc func deleteShowAlert(){

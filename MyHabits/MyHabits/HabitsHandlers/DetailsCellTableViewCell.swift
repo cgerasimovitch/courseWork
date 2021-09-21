@@ -38,6 +38,8 @@ class DetailsCellTableViewCell: UITableViewCell {
     
     func titleSetup(labelHere: UILabel){
         labelHere.text = "Собирать тестовые сборки"
+        labelHere.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.regular)
+        labelHere.textColor = .black
     }
     func titleSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false

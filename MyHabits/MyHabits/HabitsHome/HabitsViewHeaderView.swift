@@ -48,8 +48,8 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
     // MARK: - Setup every subview
     func inspireHeaderSetup(labelHere: UILabel){
         labelHere.text = "Всё получится!"
-        labelHere.font = UIFont(name: "SF Pro Display-Semibold", size: 20)
-        labelHere.textColor = .systemGray2
+        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.semibold)
+        labelHere.textColor = .systemGray
     }
     
     
@@ -66,8 +66,8 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
     func inspireProgressHeaderSetup(labelHere: UILabel){
         
         labelHere.textAlignment = .right
-        labelHere.font = UIFont(name: "SF Pro Display-Semibold", size: 20)
-        labelHere.textColor = .systemGray2
+        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
+        labelHere.textColor = .systemGray
     }
     
     func inspireProgressHeaderSetupLayout(labelHere: UILabel){

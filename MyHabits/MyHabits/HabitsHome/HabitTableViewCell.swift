@@ -56,7 +56,8 @@ class HabitTableViewCell: UITableViewCell {
     
     // MARK: - Setup every subview
     func titleSetup(labelHere: UILabel){
-        labelHere.text = "Собирать тестовые сборки"
+        labelHere.text = ""
+        labelHere.font = UIFont.systemFont(ofSize: 17, weight: UIFont.Weight.semibold)
     }
     func titleSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
@@ -69,8 +70,9 @@ class HabitTableViewCell: UITableViewCell {
     }
     
     func subtitleSetup(labelHere: UILabel){
-        labelHere.text = "Три раза в день"
+        labelHere.text = ""
         labelHere.textColor = .systemGray2
+        labelHere.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.regular)
     }
     func subtitleSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
@@ -83,8 +85,9 @@ class HabitTableViewCell: UITableViewCell {
     }
     
     func counterTitleSetup(labelHere: UILabel){
-        labelHere.text = "Cчётчик: 3"
-        labelHere.textColor = .systemGray2
+        labelHere.text = ""
+        labelHere.textColor = .systemGray
+        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
     }
     
     func counterTitleSetupLayout(labelHere: UILabel){

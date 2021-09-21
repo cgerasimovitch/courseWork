@@ -39,8 +39,8 @@ class DetailsHeader: UITableViewHeaderFooterView {
 
     func dateHeaderSetup(labelHere: UILabel){
         labelHere.text = "АКТИВНОСТЬ"
-        labelHere.font = UIFont(name: "SF Pro Display-Semibold", size: 20)
-        labelHere.textColor = .systemGray2
+        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
+        labelHere.textColor = .systemGray
     }
     
     

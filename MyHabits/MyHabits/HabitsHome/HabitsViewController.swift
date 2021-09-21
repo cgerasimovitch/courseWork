@@ -22,7 +22,6 @@ class HabitsViewController: UIViewController {
         setupEverySubview()
         addTableViewElementsDelegateAndDataSource(tableHere: tableItemsView)
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
-        
     }
     
    
@@ -58,7 +57,7 @@ class HabitsViewController: UIViewController {
     
     func titleHeaderSetup(labelHere: UILabel){
         labelHere.text = "Сегодня"
-        labelHere.font = UIFont(name: "SF Pro Display-Semibold", size: 20)
+        labelHere.font = UIFont.systemFont(ofSize: 34, weight: UIFont.Weight.bold)
         labelHere.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
     }
     
@@ -74,8 +73,10 @@ class HabitsViewController: UIViewController {
     }
     func buttonAddSetup(buttonHere: UIButton){
         buttonHere.setTitle("+", for: .normal)
+        buttonHere.titleLabel?.font = UIFont.systemFont(ofSize: 23, weight: UIFont.Weight.regular)
         buttonHere.setTitleColor(UIColor(red: 0.63, green: 0.09, blue: 0.80, alpha: 1.00), for: .normal)
         buttonHere.addTarget(self, action: #selector(addNewItem), for: .touchUpInside)
+        
     }
     
     @objc func addNewItem(){
