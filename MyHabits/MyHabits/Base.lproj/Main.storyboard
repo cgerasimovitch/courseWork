@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="b7K-ii-Cnn">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="aCu-MG-ZVE">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
@@ -8,24 +8,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Tab Bar Controller-->
-        <scene sceneID="3RA-e0-6nq">
-            <objects>
-                <tabBarController id="b7K-ii-Cnn" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="lSf-vO-HeZ">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="gB6-Qs-PmJ" kind="relationship" relationship="viewControllers" id="1f0-PN-N6e"/>
-                        <segue destination="hRB-FP-PYa" kind="relationship" relationship="viewControllers" id="gVf-Q5-hJ7"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ySP-Cq-8w6" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-1346" y="-196"/>
-        </scene>
         <!--Habits View Controller-->
         <scene sceneID="KTW-0u-Tl2">
             <objects>
@@ -40,7 +22,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bil-BP-Vhh" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1518.840579710145" y="-352.23214285714283"/>
+            <point key="canvasLocation" x="2428.985507246377" y="-352.23214285714283"/>
         </scene>
         <!--Info View Controller-->
         <scene sceneID="Yk2-pJ-TZl">
@@ -71,7 +53,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iHa-v3-dR7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2661" y="38"/>
+            <point key="canvasLocation" x="3571.0144927536235" y="37.5"/>
         </scene>
         <!--HabitItemViewController-->
         <scene sceneID="r8m-Qi-VnF">
@@ -87,13 +69,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fqH-r4-da1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2678" y="-683"/>
+            <point key="canvasLocation" x="3586.9565217391305" y="-683.03571428571422"/>
         </scene>
         <!--Привычки-->
         <scene sceneID="MfE-WU-6RC">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gB6-Qs-PmJ" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Привычки" image="Habits_tab_icon" id="qw4-7o-HXk"/>
+                    <tabBarItem key="tabBarItem" title="Привычки" image="habits_tab_icon" id="qw4-7o-HXk"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="EY7-cr-Bpd">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -106,13 +88,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wSN-OI-8CM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="608.69565217391312" y="-352.23214285714283"/>
+            <point key="canvasLocation" x="1518.840579710145" y="-352.23214285714283"/>
         </scene>
         <!--Информация-->
         <scene sceneID="dMK-qk-EQO">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hRB-FP-PYa" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Информация" image="info_tab_icon" id="hCy-aC-IXP"/>
+                    <tabBarItem key="tabBarItem" title="Информация" image="info.circle.fill" id="hCy-aC-IXP"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="3Im-cs-yI5">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -127,10 +109,28 @@
             </objects>
             <point key="canvasLocation" x="789.85507246376812" y="414.50892857142856"/>
         </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="W2L-bH-qOF">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="aCu-MG-ZVE" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="5iC-Pl-iTX">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="gB6-Qs-PmJ" kind="relationship" relationship="viewControllers" id="HZ0-lj-403"/>
+                        <segue destination="hRB-FP-PYa" kind="relationship" relationship="viewControllers" id="Urc-ZA-iEa"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="aZp-MC-YeX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="404" y="-343"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="Habits_tab_icon" width="12.5" height="11.5"/>
-        <image name="info_tab_icon" width="17" height="15"/>
+        <image name="habits_tab_icon" width="25" height="23"/>
+        <image name="info.circle.fill" width="33" height="30"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
