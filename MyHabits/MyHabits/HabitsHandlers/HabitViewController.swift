@@ -194,7 +194,7 @@ class HabitViewController: UIViewController {
         let range = (mainString as NSString).range(of: stringToColor)
         let mutableAttributedString = NSMutableAttributedString.init(string: mainString)
         let fontColor = itemColorView.backgroundColor
-        mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: fontColor, range: range)
+        mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: fontColor ?? UIColor.black, range: range)
         labelHere.attributedText = mutableAttributedString
        
         
@@ -251,8 +251,7 @@ class HabitViewController: UIViewController {
     
     func deleteItem() {
         store.habits.remove(at: indexToEdit)
-        dismissViewController()
-        
+        dismissViewController()        
         }
     
     
@@ -269,7 +268,7 @@ class HabitViewController: UIViewController {
     @objc func saveItem(){
        
         if itemNameTextField.text != ""{
-        var newHabit = Habit(name: itemNameTextField.text!,
+        let newHabit = Habit(name: itemNameTextField.text!,
                              date: chosenDate as Date,
                              color: itemColorView.backgroundColor!)
             if isNewHabit == true {

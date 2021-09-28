@@ -138,7 +138,7 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: HabitTableViewCell.cellId, for: indexPath) as! HabitTableViewCell
         
-        var store = storeOfHabits.habits[indexPath.row]
+        let store = storeOfHabits.habits[indexPath.row]
         cell.habitcellTitle.text = store.name
         cell.cellSubtitle.text = store.dateString
         cell.cellCounterTitle.text = "Счётчик: \(String(store.trackDates.count))"
