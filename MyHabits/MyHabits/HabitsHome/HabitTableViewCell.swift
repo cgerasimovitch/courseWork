@@ -60,13 +60,14 @@ class HabitTableViewCell: UITableViewCell {
     }
      
     func whiteUIViewSetupLayout(viewHere: UIView){
-        viewHere.backgroundColor = .black
+        viewHere.backgroundColor = .white
+        viewHere.layer.cornerRadius = 8
         viewHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            viewHere.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
-            viewHere.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
-            viewHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10),
-            viewHere.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10),
+            viewHere.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 6),
+            viewHere.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -6),
+            viewHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
+            viewHere.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
         ])
     }
    

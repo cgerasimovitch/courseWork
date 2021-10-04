@@ -48,13 +48,14 @@ class HabitsViewController: UIViewController {
     }
     
     func addTableViewElementsDelegateAndDataSource(tableHere: UITableView){
-        tableHere.backgroundColor = UIColor.clear
+        
         tableHere.delegate = self
         tableHere.dataSource = self
         tableHere.register(HabitsViewHeaderView.self, forHeaderFooterViewReuseIdentifier: HabitsViewHeaderView().headerId)
         tableHere.register(HabitTableViewCell.self, forCellReuseIdentifier: HabitTableViewCell.cellId)
     }
     // MARK: - Setup every subview
+    
     
     func titleHeaderSetup(labelHere: UILabel){
         labelHere.text = "Сегодня"
@@ -103,7 +104,8 @@ class HabitsViewController: UIViewController {
     }
     
     func tableItemsSetup(tableHere: UITableView){
-        
+        tableHere.separatorStyle = .none
+        tableHere.backgroundColor = UIColor.clear
     }
     
     func tableItemsSetupLayout(tableHere: UITableView){
