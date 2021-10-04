@@ -48,6 +48,7 @@ class HabitsViewController: UIViewController {
     }
     
     func addTableViewElementsDelegateAndDataSource(tableHere: UITableView){
+        tableHere.backgroundColor = UIColor.clear
         tableHere.delegate = self
         tableHere.dataSource = self
         tableHere.register(HabitsViewHeaderView.self, forHeaderFooterViewReuseIdentifier: HabitsViewHeaderView().headerId)
@@ -59,6 +60,7 @@ class HabitsViewController: UIViewController {
         labelHere.text = "Сегодня"
         labelHere.font = UIFont.systemFont(ofSize: 34, weight: UIFont.Weight.bold)
         labelHere.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        
     }
     
     func titleHeaderSetupLayout(labelHere: UILabel){
@@ -125,6 +127,7 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HabitsViewHeaderView().headerId) as! HabitsViewHeaderView
         headerView.inspireProgressHeader.text = "\(Int(storeOfHabits.todayProgress*100))%"
         headerView.inspireProgressView.progress = storeOfHabits.todayProgress
+        headerView.backgroundColor = UIColor.clear
         return headerView
     }
     
@@ -145,6 +148,7 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.habitcellTitle.textColor = store.color
         cell.checkMarkView.layer.borderColor = store.color.cgColor
         cell.habitTableViewCellIndex = indexPath.row
+        cell.backgroundColor = UIColor.clear
         if store.isAlreadyTakenToday == true {
             cell.checkMarkView.backgroundColor = UIColor(cgColor: cell.checkMarkView.layer.borderColor!)
             cell.checkMarkMarkLabel.text = "✓"}

@@ -11,7 +11,9 @@ class HabitTableViewCell: UITableViewCell {
     static let cellId = "HabitTableViewCell"
     let habitsStore = HabitsStore.shared
     let tableHeader = HabitsViewHeaderView()
+
     //MARK: - Subviews list
+    let whiteUIView = UIView()
     var habitcellTitle = UILabel()
     var cellSubtitle = UILabel()
     var cellCounterTitle = UILabel()
@@ -32,14 +34,19 @@ class HabitTableViewCell: UITableViewCell {
         }
     
     func addEverySubview(){
-        self.contentView.addSubview(habitcellTitle)
-        self.contentView.addSubview(cellSubtitle)
-        self.contentView.addSubview(cellCounterTitle)
-        self.contentView.addSubview(checkMarkView)
+        self.contentView.backgroundColor = UIColor.clear
+        
+        
+        self.contentView.addSubview(whiteUIView)
+        whiteUIView.addSubview(habitcellTitle)
+        whiteUIView.addSubview(cellSubtitle)
+        whiteUIView.addSubview(cellCounterTitle)
+        whiteUIView.addSubview(checkMarkView)
         checkMarkView.addSubview(checkMarkMarkLabel)
     }
     
     func setupEverySubview(){
+        whiteUIViewSetupLayout(viewHere: whiteUIView)
         titleSetup(labelHere: habitcellTitle)
         titleSetupLayout(labelHere: habitcellTitle)
         subtitleSetup(labelHere: cellSubtitle)
@@ -51,7 +58,17 @@ class HabitTableViewCell: UITableViewCell {
         checkmarkMarkSetup(labelhere: checkMarkMarkLabel)
         checkmarkMarkSetupLayout(labelHere: checkMarkMarkLabel)
     }
-    
+     
+    func whiteUIViewSetupLayout(viewHere: UIView){
+        viewHere.backgroundColor = .black
+        viewHere.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            viewHere.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 12),
+            viewHere.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12),
+            viewHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10),
+            viewHere.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10),
+        ])
+    }
    
     
     // MARK: - Setup every subview
