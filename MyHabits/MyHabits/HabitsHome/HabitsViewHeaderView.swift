@@ -18,8 +18,11 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        self.contentView.backgroundColor = .white
         self.contentView.layer.cornerRadius = 10
+        self.contentView.backgroundColor = .clear
+        self.backgroundView = UIView(frame: self.bounds)
+        self.backgroundView!.backgroundColor = UIColor(white: 0, alpha: 0)
+        self.clipsToBounds = true
         addEverySubview()
         setupEverySubview()
 
@@ -31,7 +34,6 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
            }
     
     func addEverySubview(){
-        self.contentView.backgroundColor = UIColor.clear
         self.contentView.addSubview(whiteView)
         whiteView.addSubview(inspireHeader)
         whiteView.addSubview(inspireProgressHeader)
@@ -50,12 +52,13 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
     
     func setupWhiteView(viewHere: UIView){
         viewHere.backgroundColor = .white
+        viewHere.layer.cornerRadius = 10
         viewHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             viewHere.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5),
-            viewHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 10),
-            viewHere.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -10),
-            viewHere.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -12)
+            viewHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
+            viewHere.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
+            viewHere.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -6)
         ])
     }
     
@@ -89,7 +92,7 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
         NSLayoutConstraint.activate([
             labelHere.widthAnchor.constraint(equalToConstant: 95),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
-            labelHere.topAnchor.constraint(equalTo: whiteView.topAnchor, constant: 10),
+            labelHere.bottomAnchor.constraint(equalTo: inspireHeader.bottomAnchor),
             labelHere.trailingAnchor.constraint(equalTo: inspireProgressView.trailingAnchor)
         ])
     }
@@ -104,7 +107,7 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
         hereProgressView.translatesAutoresizingMaskIntoConstraints = false
         
         NSLayoutConstraint.activate([
-            hereProgressView.heightAnchor.constraint(equalToConstant: 7),
+            hereProgressView.heightAnchor.constraint(equalToConstant: 10),
             hereProgressView.topAnchor.constraint(equalTo: inspireHeader.bottomAnchor, constant: 10),
             hereProgressView.bottomAnchor.constraint(equalTo: whiteView.bottomAnchor, constant: -15),
             hereProgressView.leadingAnchor.constraint(equalTo: whiteView.leadingAnchor, constant: 12),

@@ -2,7 +2,10 @@
 //  HomeViewController.swift
 //  MyHabits
 //
-//  Created by Admin on 8/19/21.
+//  Doing
+/*title и кнопка +
+расположены сейчас на основном view контроллера, а должны быть в navigationItem у navigationBar, обратите внимание на дизайн в задании
+*/
 //
 
 import UIKit
@@ -17,16 +20,16 @@ class HabitsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.00)
         tableItemsView.reloadData()
-        navigationController?.setNavigationBarHidden(false, animated: false)
+        
         addEverySubview()
         setupEverySubview()
         addTableViewElementsDelegateAndDataSource(tableHere: tableItemsView)
+       
         NotificationCenter.default.addObserver(self, selector: #selector(loadList), name: NSNotification.Name(rawValue: "load"), object: nil)
     }
     
    
     @objc func loadList(){
-            
             self.tableItemsView.reloadData()
         }
     
@@ -39,12 +42,22 @@ class HabitsViewController: UIViewController {
     }
     
     func setupEverySubview(){
-        titleHeaderSetup(labelHere: titleHeader)
-        titleHeaderSetupLayout(labelHere: titleHeader)
+        setupNavigationItems()
+       // titleHeaderSetup(labelHere: titleHeader)
+        //titleHeaderSetupLayout(labelHere: titleHeader)
         buttonAddSetup(buttonHere: buttonAdd)
-        buttonAddSetupLayout(buttonHere: buttonAdd)
+        //buttonAddSetupLayout(buttonHere: buttonAdd)
         tableItemsSetup(tableHere: tableItemsView)
         tableItemsSetupLayout(tableHere: tableItemsView)
+        
+    }
+    
+    func setupNavigationItems(){
+        self.title = "Cегодня"
+        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: buttonAdd)
+        
     }
     
     func addTableViewElementsDelegateAndDataSource(tableHere: UITableView){
@@ -92,7 +105,7 @@ class HabitsViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
-    
+    /*
     func buttonAddSetupLayout(buttonHere: UIButton){
         buttonHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -101,7 +114,7 @@ class HabitsViewController: UIViewController {
             buttonHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 44),
             buttonHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -5)
         ])
-    }
+    }*/
     
     func tableItemsSetup(tableHere: UITableView){
         tableHere.separatorStyle = .none
@@ -111,7 +124,7 @@ class HabitsViewController: UIViewController {
     func tableItemsSetupLayout(tableHere: UITableView){
         tableHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableHere.topAnchor.constraint(equalTo: titleHeader.bottomAnchor, constant: 7.5),
+            tableHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
             tableHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 17),
             tableHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -17),
             tableHere.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
@@ -129,7 +142,9 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: HabitsViewHeaderView().headerId) as! HabitsViewHeaderView
         headerView.inspireProgressHeader.text = "\(Int(storeOfHabits.todayProgress*100))%"
         headerView.inspireProgressView.progress = storeOfHabits.todayProgress
-        headerView.backgroundColor = UIColor.clear
+        
+        headerView.layer.cornerRadius = 10
+       
         return headerView
     }
     
