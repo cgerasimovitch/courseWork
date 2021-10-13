@@ -10,6 +10,8 @@ import UIKit
 class HabitViewController: UIViewController {
 
     var indexToEdit = 0
+    
+    //MARK: — UI Elements
     let itemNameHeader = UILabel()
     let itemNameTextField = UITextField()
     let itemColorHeader = UILabel()
@@ -17,14 +19,15 @@ class HabitViewController: UIViewController {
     let itemTimeHeader = UILabel()
     let itemCurrentTimeLabel = UILabel()
     let itemDatePicker = UIDatePicker()
-    var chosenDate = Date()
     let deleteButton = UIButton()
+    //MARK: — Variables
+    let store = HabitsStore.shared
+    var chosenDate = Date()
     var screenNameContainer = ""
     var isNewHabit = true
     var leftTopItemName = "Отменить"
     var rightTopItemName = "Сохранить"
     var habitName = ""
-    let store = HabitsStore.shared
     var everydayString = ""
     
     
@@ -189,7 +192,7 @@ class HabitViewController: UIViewController {
     
     func itemCurrentTimeLabelSetup(labelHere: UILabel){
         
-        let mainString = "Каждый день в \(everydayString) "
+        let mainString = "\(store.habits[indexToEdit].dateString)"
         let stringToColor = "\(everydayString)"
         let range = (mainString as NSString).range(of: stringToColor)
         let mutableAttributedString = NSMutableAttributedString.init(string: mainString)

@@ -43,10 +43,7 @@ class HabitsViewController: UIViewController {
     
     func setupEverySubview(){
         setupNavigationItems()
-       // titleHeaderSetup(labelHere: titleHeader)
-        //titleHeaderSetupLayout(labelHere: titleHeader)
         buttonAddSetup(buttonHere: buttonAdd)
-        //buttonAddSetupLayout(buttonHere: buttonAdd)
         tableItemsSetup(tableHere: tableItemsView)
         tableItemsSetupLayout(tableHere: tableItemsView)
         
@@ -77,16 +74,6 @@ class HabitsViewController: UIViewController {
         
     }
     
-    func titleHeaderSetupLayout(labelHere: UILabel){
-        labelHere.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            labelHere.widthAnchor.constraint(equalToConstant: 141),
-            labelHere.heightAnchor.constraint(equalToConstant: 40),
-            labelHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 92),
-            labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 14)
-        ])
-        
-    }
     func buttonAddSetup(buttonHere: UIButton){
         buttonHere.setTitle("+", for: .normal)
         buttonHere.titleLabel?.font = UIFont.systemFont(ofSize: 23, weight: UIFont.Weight.regular)
@@ -105,16 +92,7 @@ class HabitsViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
-    /*
-    func buttonAddSetupLayout(buttonHere: UIButton){
-        buttonHere.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            buttonHere.widthAnchor.constraint(equalToConstant: 44),
-            buttonHere.heightAnchor.constraint(equalToConstant: 40),
-            buttonHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 44),
-            buttonHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -5)
-        ])
-    }*/
+    
     
     func tableItemsSetup(tableHere: UITableView){
         tableHere.separatorStyle = .none
@@ -178,7 +156,7 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storeOfHabits = HabitsStore.shared.habits
         let vc = HabitDetailsViewController()
-        vc.leftTopItemName = self.titleHeader.text!
+        vc.leftTopItemName = self.title ?? ""
         vc.screenNameContainer = storeOfHabits[indexPath.row].name
         
         vc.indexToTransport = indexPath.row

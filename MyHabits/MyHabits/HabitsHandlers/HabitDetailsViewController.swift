@@ -30,7 +30,7 @@ class HabitDetailsViewController: UIViewController {
         title = screenNameContainer
         addTableViewElementsDelegateAndDataSource(tableHere: datesTable)
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: leftTopItemName, style: .plain, target: self, action: #selector(dismissViewController))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveEditedItem))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(editedItem))
         trackedDate = store.habits[indexToTransport].trackDates.reversed()
         
     }
@@ -76,12 +76,12 @@ class HabitDetailsViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-    @objc func saveEditedItem(){
+    @objc func editedItem(){
         let vc = HabitViewController()
         vc.screenNameContainer = rightTopItemName
         vc.itemNameTextField.text = screenNameContainer
         vc.isNewHabit = false
-        vc.itemColorView.backgroundColor = .white
+        vc.itemColorView.backgroundColor = store.habits[indexToTransport].color
         vc.chosenDate = store.habits[indexToTransport].date
         vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
         vc.indexToEdit = indexToTransport
@@ -99,14 +99,13 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
         60
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        store.habits[indexToTransport].trackDates.count
+        return store.habits[indexToTransport].trackDates.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailsCellTableViewCell.cellId, for: indexPath) as! DetailsCellTableViewCell
-        
-        
-        
+        print("trackedDate is: \(trackedDate)")
         if Calendar.current.isDateInToday(trackedDate[indexPath.row]){
             cell.datecellTitle.text = "Сегодня"
         }
@@ -116,8 +115,6 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
         }
         else { cell.datecellTitle.text =
             dateFormatter.string(from: trackedDate[indexPath.row])}
-            
-        
        
         return cell
     }
