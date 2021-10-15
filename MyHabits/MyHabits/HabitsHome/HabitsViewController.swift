@@ -150,6 +150,7 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
         else{ cell.checkMarkView.backgroundColor = .white
             cell.checkMarkMarkLabel.text = ""
         }
+        
         return cell
     }
     

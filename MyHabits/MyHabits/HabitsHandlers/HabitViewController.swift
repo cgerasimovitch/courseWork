@@ -28,8 +28,6 @@ class HabitViewController: UIViewController {
     var leftTopItemName = "Отменить"
     var rightTopItemName = "Сохранить"
     var habitName = ""
-    var everydayString = ""
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,13 +40,6 @@ class HabitViewController: UIViewController {
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveItem))
         if isNewHabit == true{
             fetchDate()}
-        else{
-            let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "ru_RU")
-            formatter.dateStyle = .none
-            formatter.timeStyle = .short
-            everydayString = formatter.string(from: chosenDate)
-        }
     }
     
     override func viewWillLayoutSubviews() {
@@ -93,7 +84,7 @@ class HabitViewController: UIViewController {
         itemDatePickerSetupLayout(datePickerHere: itemDatePicker)
         if isNewHabit == false{
         buttonDeleteSetup(buttonHere: deleteButton)
-            buttonDeleteSetupLayout(buttonHere: deleteButton)}
+        buttonDeleteSetupLayout(buttonHere: deleteButton)}
     }
     // MARK: - Setup every subview
     func itemNameHeaderSetup(labelHere: UILabel){
@@ -143,7 +134,7 @@ class HabitViewController: UIViewController {
     }
     
     func itemColorViewSetup(viewHere: UIView){
-        viewHere.backgroundColor = store.habits[indexToEdit].color
+        viewHere.backgroundColor = store.habits[indexToEdit].color // !!! Тут ошибка
         viewHere.layer.cornerRadius = 15
         viewHere.isUserInteractionEnabled = true
         //Add gesture
@@ -191,15 +182,14 @@ class HabitViewController: UIViewController {
     }
     
     func itemCurrentTimeLabelSetup(labelHere: UILabel){
-        
-        let mainString = "\(store.habits[indexToEdit].dateString)"
-        let stringToColor = "\(everydayString)"
-        let range = (mainString as NSString).range(of: stringToColor)
+        var dateToColor = dateToTime(dateToConvert: chosenDate)
+        let mainString = "Каждый день в \(dateToColor)"
+        let range = (mainString as NSString).range(of: dateToColor)
         let mutableAttributedString = NSMutableAttributedString.init(string: mainString)
         let fontColor = itemColorView.backgroundColor
         mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: fontColor ?? UIColor.black, range: range)
         labelHere.attributedText = mutableAttributedString
-       
+        print(mainString)
         
     }
     func itemCurrentTimeLabelSetupLayout(labelHere: UILabel){
@@ -216,7 +206,6 @@ class HabitViewController: UIViewController {
         datePickerHere.datePickerMode = .time
         datePickerHere.preferredDatePickerStyle = .wheels
         datePickerHere.date = chosenDate
-        
         datePickerHere.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         
     }
@@ -289,23 +278,21 @@ class HabitViewController: UIViewController {
     
     func fetchDate(){
         
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ru_RU")
-        formatter.dateStyle = .none
-        formatter.timeStyle = .short
-        let stringDate = formatter.string(from: itemDatePicker.date)
-        everydayString = stringDate
-        chosenDate = formatter.date(from: stringDate)!
         itemCurrentTimeLabelSetup(labelHere: itemCurrentTimeLabel)
         
     }
     @objc func dateChanged(_ sender: UIDatePicker) {
+        chosenDate = itemDatePicker.date
         fetchDate()
     }
     
-    
-    //MARK: - Saving Habit
-   
+    func dateToTime(dateToConvert: Date) -> String{
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ru_RU")
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        return formatter.string(from: dateToConvert)
+    }
 
 }
 
