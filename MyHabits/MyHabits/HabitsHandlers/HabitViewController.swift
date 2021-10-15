@@ -187,12 +187,12 @@ class HabitViewController: UIViewController {
     }
     
     func itemCurrentTimeLabelSetup(labelHere: UILabel){
-        var dateToColor = dateToTime(dateToConvert: chosenDate)
+        let dateToColor = dateToTime(dateToConvert: chosenDate)
         let mainString = "Каждый день в \(dateToColor)"
         let range = (mainString as NSString).range(of: dateToColor)
         let mutableAttributedString = NSMutableAttributedString.init(string: mainString)
-        let fontColor = itemColorView.backgroundColor
-        mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: fontColor ?? UIColor.black, range: range)
+        let fontColor = colorToChange
+        mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: fontColor, range: range)
         labelHere.attributedText = mutableAttributedString
         print(mainString)
         
@@ -267,12 +267,13 @@ class HabitViewController: UIViewController {
         if itemNameTextField.text != ""{
         let newHabit = Habit(name: itemNameTextField.text!,
                              date: chosenDate as Date,
-                             color: itemColorView.backgroundColor!)
+                             color: colorToChange)
             if isNewHabit == true {
                 self.store.habits.append(newHabit)}
             else{
-                self.store.habits.remove(at: indexToEdit)
-                self.store.habits.insert(newHabit, at: indexToEdit)
+                self.store.habits[indexToEdit].name = newHabit.name
+                self.store.habits[indexToEdit].date = newHabit.date
+                self.store.habits[indexToEdit].color = newHabit.color
             }
             dismissViewController()
         }
@@ -322,7 +323,7 @@ extension HabitViewController: UIColorPickerViewControllerDelegate {
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
         colorToChange = viewController.selectedColor
         itemColorView.backgroundColor = colorToChange
-        
+        itemCurrentTimeLabelSetup(labelHere: itemCurrentTimeLabel)
     }
 }
 
