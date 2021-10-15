@@ -22,6 +22,7 @@ class HabitViewController: UIViewController {
     let deleteButton = UIButton()
     //MARK: — Variables
     let store = HabitsStore.shared
+    var colorToChange = UIColor()
     var chosenDate = Date()
     var screenNameContainer = ""
     var isNewHabit = true
@@ -38,9 +39,12 @@ class HabitViewController: UIViewController {
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: leftTopItemName, style: .plain, target: self, action: #selector(dismissViewController))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveItem))
-        print("chosenAtStart: \(chosenDate)")
+        
         if isNewHabit == true{
+            colorToChange = UIColor(red: 0.63, green: 0.09, blue: 0.80, alpha: 1.00)
             fetchDate()}
+        else{
+            colorToChange = store.habits[indexToEdit].color}
     }
     
     override func viewWillLayoutSubviews() {
@@ -135,7 +139,7 @@ class HabitViewController: UIViewController {
     }
     
     func itemColorViewSetup(viewHere: UIView){
-        viewHere.backgroundColor = store.habits[indexToEdit].color // !!! Тут ошибка
+        viewHere.backgroundColor = colorToChange // !!! Тут ошибка
         viewHere.layer.cornerRadius = 15
         viewHere.isUserInteractionEnabled = true
         //Add gesture
@@ -148,7 +152,7 @@ class HabitViewController: UIViewController {
         let colorPicker = HabitColorViewController()
        
         // Setting the Initial Color of the Picker
-        colorPicker.selectedColor = itemColorView.backgroundColor!
+        colorPicker.selectedColor = colorToChange
 
         // Setting Delegate
         colorPicker.delegate = self
@@ -300,13 +304,13 @@ class HabitViewController: UIViewController {
     }
     
     func updateTimeOnly(dateToChangeTime: Date) -> Date{
-        print("oldchosenDAte is: \(dateToChangeTime)")
+        
         var currentComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dateToChangeTime)
         let datePickerComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: itemDatePicker.date)
         currentComponents.hour = datePickerComponents.hour
         currentComponents.minute = datePickerComponents.minute
         let newDate = Calendar.current.date(from: currentComponents) ?? Date()
-        print("chosenDAte is: \(newDate)")
+        
         return(newDate)
     }
 
@@ -316,7 +320,8 @@ extension HabitViewController: UIColorPickerViewControllerDelegate {
     
     //  Called once you have finished picking the color.
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
-        self.itemColorView.backgroundColor = viewController.selectedColor
+        colorToChange = viewController.selectedColor
+        itemColorView.backgroundColor = colorToChange
         
     }
 }

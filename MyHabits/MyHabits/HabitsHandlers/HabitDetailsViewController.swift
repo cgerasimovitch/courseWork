@@ -100,15 +100,12 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
         60
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("Date is: \(store.habits[indexToTransport].date)")
-        print("Is marked today: \(store.habits[indexToTransport].isAlreadyTakenToday)")
         return store.habits[indexToTransport].trackDates.count
         
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailsCellTableViewCell.cellId, for: indexPath) as! DetailsCellTableViewCell
-        print("trackedDate is: \(trackedDate)")
         if Calendar.current.isDateInToday(trackedDate[indexPath.row]){
             cell.datecellTitle.text = "Сегодня"
         }
