@@ -83,6 +83,7 @@ class HabitDetailsViewController: UIViewController {
         vc.isNewHabit = false
         vc.itemColorView.backgroundColor = store.habits[indexToTransport].color
         vc.chosenDate = store.habits[indexToTransport].date
+        print("sending chosenDate: \(vc.chosenDate)")
         vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
         vc.indexToEdit = indexToTransport
         self.navigationController?.pushViewController(vc, animated: true)
@@ -99,6 +100,8 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
         60
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("Date is: \(store.habits[indexToTransport].date)")
+        print("Is marked today: \(store.habits[indexToTransport].isAlreadyTakenToday)")
         return store.habits[indexToTransport].trackDates.count
         
     }

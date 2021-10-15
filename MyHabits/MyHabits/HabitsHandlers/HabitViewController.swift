@@ -38,6 +38,7 @@ class HabitViewController: UIViewController {
         
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: leftTopItemName, style: .plain, target: self, action: #selector(dismissViewController))
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveItem))
+        print("chosenAtStart: \(chosenDate)")
         if isNewHabit == true{
             fetchDate()}
     }
@@ -282,7 +283,11 @@ class HabitViewController: UIViewController {
         
     }
     @objc func dateChanged(_ sender: UIDatePicker) {
-        chosenDate = itemDatePicker.date
+        if isNewHabit == true{
+            chosenDate = itemDatePicker.date
+        }
+        chosenDate = updateTimeOnly(dateToChangeTime: chosenDate)
+        
         fetchDate()
     }
     
@@ -292,6 +297,17 @@ class HabitViewController: UIViewController {
         formatter.dateStyle = .none
         formatter.timeStyle = .short
         return formatter.string(from: dateToConvert)
+    }
+    
+    func updateTimeOnly(dateToChangeTime: Date) -> Date{
+        print("oldchosenDAte is: \(dateToChangeTime)")
+        var currentComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dateToChangeTime)
+        let datePickerComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: itemDatePicker.date)
+        currentComponents.hour = datePickerComponents.hour
+        currentComponents.minute = datePickerComponents.minute
+        let newDate = Calendar.current.date(from: currentComponents) ?? Date()
+        print("chosenDAte is: \(newDate)")
+        return(newDate)
     }
 
 }
