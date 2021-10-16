@@ -54,6 +54,7 @@ class HabitsViewController: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         self.navigationController?.navigationBar.prefersLargeTitles = true
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: buttonAdd)
+        self.navigationItem.setHidesBackButton(true, animated:true)
         
     }
     
