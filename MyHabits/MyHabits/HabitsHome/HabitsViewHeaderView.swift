@@ -18,11 +18,10 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        self.contentView.layer.cornerRadius = 10
-        self.contentView.backgroundColor = .clear
-        self.backgroundView = UIView(frame: self.bounds)
-        self.backgroundView!.backgroundColor = UIColor(white: 0, alpha: 0)
-        self.clipsToBounds = true
+        contentView.layer.cornerRadius = 10
+        contentView.backgroundColor = .clear
+        backgroundView = UIView(frame: self.bounds)
+        backgroundView!.backgroundColor = UIColor(white: 0, alpha: 0)
         addEverySubview()
         setupEverySubview()
 
@@ -34,7 +33,7 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
            }
     
     func addEverySubview(){
-        self.contentView.addSubview(whiteView)
+        contentView.addSubview(whiteView)
         whiteView.addSubview(inspireHeader)
         whiteView.addSubview(inspireProgressHeader)
         whiteView.addSubview(inspireProgressView)
@@ -55,10 +54,10 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
         viewHere.layer.cornerRadius = 10
         viewHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            viewHere.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 5),
-            viewHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 0),
-            viewHere.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: 0),
-            viewHere.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -6)
+            viewHere.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
+            viewHere.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
+            viewHere.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0),
+            viewHere.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6)
         ])
     }
     

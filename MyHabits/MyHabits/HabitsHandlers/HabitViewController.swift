@@ -34,11 +34,11 @@ class HabitViewController: UIViewController {
         super.viewDidLoad()
         
         title = screenNameContainer
-        self.view.backgroundColor = .white
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        view.backgroundColor = .white
+        navigationController?.setNavigationBarHidden(false, animated: false)
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: leftTopItemName, style: .plain, target: self, action: #selector(dismissViewController))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveItem))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: leftTopItemName, style: .plain, target: self, action: #selector(dismissViewController))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveItem))
         
         if isNewHabit == true{
             colorToChange = UIColor(red: 0.63, green: 0.09, blue: 0.80, alpha: 1.00)
@@ -56,20 +56,20 @@ class HabitViewController: UIViewController {
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
         let vc = HabitsViewController()
         vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     
     func addEverySubview() {
-        self.view.addSubview(itemNameHeader)
-        self.view.addSubview(itemNameTextField)
-        self.view.addSubview(itemColorHeader)
-        self.view.addSubview(itemColorView)
-        self.view.addSubview(itemTimeHeader)
-        self.view.addSubview(itemCurrentTimeLabel)
-        self.view.addSubview(itemDatePicker)
+        view.addSubview(itemNameHeader)
+        view.addSubview(itemNameTextField)
+        view.addSubview(itemColorHeader)
+        view.addSubview(itemColorView)
+        view.addSubview(itemTimeHeader)
+        view.addSubview(itemCurrentTimeLabel)
+        view.addSubview(itemDatePicker)
         if isNewHabit == false{
-            self.view.addSubview(deleteButton)}
+            view.addSubview(deleteButton)}
     }
     
     func setupEverySubview() {
@@ -102,8 +102,8 @@ class HabitViewController: UIViewController {
         NSLayoutConstraint.activate([
             labelHere.widthAnchor.constraint(equalToConstant: 100),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
-            labelHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 21),
-            labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+            labelHere.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 21),
+            labelHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         ])
     }
     
@@ -119,7 +119,7 @@ class HabitViewController: UIViewController {
             textFieldHere.widthAnchor.constraint(equalToConstant: 295),
             textFieldHere.heightAnchor.constraint(equalToConstant: 22),
             textFieldHere.topAnchor.constraint(equalTo: itemNameHeader.bottomAnchor, constant: 7),
-            textFieldHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 15)
+            textFieldHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15)
         ])
     }
     
@@ -134,7 +134,7 @@ class HabitViewController: UIViewController {
             labelHere.widthAnchor.constraint(equalToConstant: 60),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
             labelHere.topAnchor.constraint(equalTo: itemNameTextField.bottomAnchor, constant: 15),
-            labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+            labelHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         ])
     }
     
@@ -168,7 +168,7 @@ class HabitViewController: UIViewController {
             viewHere.widthAnchor.constraint(equalToConstant: 30),
             viewHere.heightAnchor.constraint(equalToConstant: 30),
             viewHere.topAnchor.constraint(equalTo: itemColorHeader.bottomAnchor, constant: 7),
-            viewHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+            viewHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         ])
     }
     
@@ -182,7 +182,7 @@ class HabitViewController: UIViewController {
             labelHere.widthAnchor.constraint(equalToConstant: 60),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
             labelHere.topAnchor.constraint(equalTo: itemColorView.bottomAnchor, constant: 15),
-            labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+            labelHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         ])
     }
     
@@ -203,8 +203,8 @@ class HabitViewController: UIViewController {
             labelHere.widthAnchor.constraint(equalToConstant: 194),
             labelHere.heightAnchor.constraint(equalToConstant: 22),
             labelHere.topAnchor.constraint(equalTo: itemTimeHeader.bottomAnchor, constant: 7),
-            labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            labelHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 16)
+            labelHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            labelHere.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16)
         ])
     }
     func itemDatePickerSetup(datePickerHere: UIDatePicker){
@@ -220,8 +220,8 @@ class HabitViewController: UIViewController {
         NSLayoutConstraint.activate([
             datePickerHere.heightAnchor.constraint(equalToConstant: 216),
             datePickerHere.topAnchor.constraint(equalTo: itemCurrentTimeLabel.bottomAnchor, constant: 15),
-            datePickerHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            datePickerHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+            datePickerHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            datePickerHere.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
     
@@ -258,8 +258,8 @@ class HabitViewController: UIViewController {
         NSLayoutConstraint.activate([
             buttonHere.widthAnchor.constraint(equalToConstant: 420),
             buttonHere.heightAnchor.constraint(equalToConstant: 22),
-            buttonHere.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -18),
-            buttonHere.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor)
+            buttonHere.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -18),
+            buttonHere.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])}
     
     @objc func saveItem(){
@@ -269,11 +269,11 @@ class HabitViewController: UIViewController {
                              date: chosenDate as Date,
                              color: colorToChange)
             if isNewHabit == true {
-                self.store.habits.append(newHabit)}
+                store.habits.append(newHabit)}
             else{
-                self.store.habits[indexToEdit].name = newHabit.name
-                self.store.habits[indexToEdit].date = newHabit.date
-                self.store.habits[indexToEdit].color = newHabit.color
+                store.habits[indexToEdit].name = newHabit.name
+                store.habits[indexToEdit].date = newHabit.date
+                store.habits[indexToEdit].color = newHabit.color
             }
             dismissViewController()
         }

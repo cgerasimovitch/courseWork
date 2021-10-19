@@ -30,14 +30,14 @@ class HabitsViewController: UIViewController {
     
    
     @objc func loadList(){
-            self.tableItemsView.reloadData()
+            tableItemsView.reloadData()
         }
     
     
     func addEverySubview(){
-        self.view.addSubview(titleHeader)
-        self.view.addSubview(buttonAdd)
-        self.view.addSubview(tableItemsView)
+        view.addSubview(titleHeader)
+        view.addSubview(buttonAdd)
+        view.addSubview(tableItemsView)
         
     }
     
@@ -50,11 +50,11 @@ class HabitsViewController: UIViewController {
     }
     
     func setupNavigationItems(){
-        self.title = "Cегодня"
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
-        self.navigationController?.navigationBar.prefersLargeTitles = true
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: buttonAdd)
-        self.navigationItem.setHidesBackButton(true, animated:true)
+        title = "Cегодня"
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: buttonAdd)
+        navigationItem.setHidesBackButton(true, animated:true)
         
     }
     
@@ -90,7 +90,7 @@ class HabitsViewController: UIViewController {
         vc.itemColorView.backgroundColor = .white
         
         vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
         
     }
     
@@ -98,15 +98,16 @@ class HabitsViewController: UIViewController {
     func tableItemsSetup(tableHere: UITableView){
         tableHere.separatorStyle = .none
         tableHere.backgroundColor = UIColor.clear
+        tableHere.showsVerticalScrollIndicator = false
     }
     
     func tableItemsSetupLayout(tableHere: UITableView){
         tableHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            tableHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 17),
-            tableHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: -17),
-            tableHere.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor),
+            tableHere.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 17),
+            tableHere.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -17),
+            tableHere.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
         ])
         
     }
@@ -158,12 +159,12 @@ extension HabitsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let storeOfHabits = HabitsStore.shared.habits
         let vc = HabitDetailsViewController()
-        vc.leftTopItemName = self.title ?? ""
+        vc.leftTopItemName = title ?? ""
         vc.screenNameContainer = storeOfHabits[indexPath.row].name
         
         vc.indexToTransport = indexPath.row
         vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
         
     }
     

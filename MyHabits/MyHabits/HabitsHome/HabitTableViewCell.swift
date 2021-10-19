@@ -34,10 +34,10 @@ class HabitTableViewCell: UITableViewCell {
         }
     
     func addEverySubview(){
-        self.contentView.backgroundColor = UIColor.clear
+        contentView.backgroundColor = UIColor.clear
         
         
-        self.contentView.addSubview(whiteUIView)
+        contentView.addSubview(whiteUIView)
         whiteUIView.addSubview(habitcellTitle)
         whiteUIView.addSubview(cellSubtitle)
         whiteUIView.addSubview(cellCounterTitle)
@@ -64,10 +64,10 @@ class HabitTableViewCell: UITableViewCell {
         viewHere.layer.cornerRadius = 8
         viewHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            viewHere.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 6),
-            viewHere.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -6),
-            viewHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor),
-            viewHere.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor)
+            viewHere.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 6),
+            viewHere.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6),
+            viewHere.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            viewHere.trailingAnchor.constraint(equalTo: contentView.trailingAnchor)
         ])
     }
    
@@ -82,8 +82,8 @@ class HabitTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             labelHere.widthAnchor.constraint(equalToConstant: 220),
             labelHere.heightAnchor.constraint(equalToConstant: 22),
-            labelHere.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 20),
-            labelHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20)
+            labelHere.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 20),
+            labelHere.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
         ])
     }
     
@@ -98,7 +98,7 @@ class HabitTableViewCell: UITableViewCell {
             labelHere.widthAnchor.constraint(equalToConstant: 220),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
             labelHere.topAnchor.constraint(equalTo: habitcellTitle.bottomAnchor, constant: 4),
-            labelHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20)
+            labelHere.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
         ])
     }
     
@@ -114,8 +114,8 @@ class HabitTableViewCell: UITableViewCell {
             labelHere.widthAnchor.constraint(equalToConstant: 188),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
             labelHere.topAnchor.constraint(equalTo: cellSubtitle.bottomAnchor, constant: 30),
-            labelHere.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -20),
-            labelHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20)
+            labelHere.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
+            labelHere.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20)
         ])
     }
     
@@ -150,8 +150,8 @@ class HabitTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             viewHere.widthAnchor.constraint(equalToConstant: 38),
             viewHere.heightAnchor.constraint(equalToConstant: 38),
-            viewHere.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor),
-            viewHere.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -25)
+            viewHere.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
+            viewHere.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -25)
         ])
     }
     

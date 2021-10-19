@@ -7,7 +7,7 @@
 
 import UIKit
 
-class LaunchScreenViewController: UIViewController {
+class LaunchScreen1ViewController: UIViewController {
     let logoImageView = UIImageView()
     let appName = UILabel()
     override func viewDidLoad() {
@@ -18,8 +18,8 @@ class LaunchScreenViewController: UIViewController {
     }
     
     func addEverySubview(){
-        self.view.addSubview(logoImageView)
-        self.view.addSubview(appName)
+        view.addSubview(logoImageView)
+        view.addSubview(appName)
     }
 
     func setupEverySubview(){
@@ -37,8 +37,8 @@ class LaunchScreenViewController: UIViewController {
     func logoImageSetupLayout(imageViewHere: UIImageView){
         imageViewHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            imageViewHere.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            imageViewHere.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
+            imageViewHere.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            imageViewHere.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
     
@@ -51,8 +51,8 @@ class LaunchScreenViewController: UIViewController {
         NSLayoutConstraint.activate([
             labelHere.widthAnchor.constraint(equalToConstant: 88),
             labelHere.heightAnchor.constraint(equalToConstant: 24),
-            labelHere.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
-            labelHere.bottomAnchor.constraint(equalTo: self.view.bottomAnchor, constant: 76)
+            labelHere.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            labelHere.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 76)
         ])
     }
 

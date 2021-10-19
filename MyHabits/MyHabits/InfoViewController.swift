@@ -21,12 +21,12 @@ class InfoViewController: UIViewController, UIScrollViewDelegate {
         infoScrollView.delegate = self
         addEverySubview()
         setupEverySubview()
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: false)
         title = "Информация"
     }
     
     func addEverySubview(){
-        self.view.addSubview(infoScrollView)
+        view.addSubview(infoScrollView)
         infoScrollView.addSubview(infoLabel)
         infoScrollView.addSubview(titleHeader)
     }
@@ -67,10 +67,10 @@ class InfoViewController: UIViewController, UIScrollViewDelegate {
     func infoScrollViewSetupLayout(scrollHere: UIScrollView){
         scrollHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            scrollHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            scrollHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            scrollHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            scrollHere.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            scrollHere.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollHere.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollHere.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
     
@@ -94,8 +94,8 @@ class InfoViewController: UIViewController, UIScrollViewDelegate {
         labelHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             labelHere.topAnchor.constraint(equalTo: titleHeader.bottomAnchor, constant: 16),
-            labelHere.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-            labelHere.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
+            labelHere.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            labelHere.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             labelHere.bottomAnchor.constraint(equalTo: infoScrollView.bottomAnchor),
             labelHere.heightAnchor.constraint(lessThanOrEqualToConstant: 876)
         ])
