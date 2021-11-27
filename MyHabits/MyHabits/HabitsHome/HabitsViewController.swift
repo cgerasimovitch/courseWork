@@ -11,9 +11,31 @@
 import UIKit
 
 class HabitsViewController: UIViewController {
-    let titleHeader = UILabel()
-    let buttonAdd = UIButton()
-    let tableItemsView = UITableView()
+    let titleHeader: UILabel = {
+        let labelHere = UILabel()
+        labelHere.text = "Сегодня"
+        labelHere.font = UIFont.systemFont(ofSize: 34, weight: UIFont.Weight.bold)
+        labelHere.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
+        return labelHere
+    }()
+    
+    let buttonAdd: UIButton = {
+        let buttonHere = UIButton()
+        buttonHere.setTitle("+", for: .normal)
+        buttonHere.titleLabel?.font = UIFont.systemFont(ofSize: 23, weight: UIFont.Weight.regular)
+        buttonHere.setTitleColor(UIColor(red: 0.63, green: 0.09, blue: 0.80, alpha: 1.00), for: .normal)
+        buttonHere.addTarget(self, action: #selector(addNewItem), for: .touchUpInside)
+        return buttonHere
+    }()
+    
+    let tableItemsView:UITableView = {
+        let tableHere = UITableView()
+        tableHere.separatorStyle = .none
+        tableHere.backgroundColor = UIColor.clear
+        tableHere.showsVerticalScrollIndicator = false
+        return tableHere
+    }()
+    
     var indexToHold = 0
     let storeOfHabits = HabitsStore.shared
     override func viewDidLoad() {
@@ -43,8 +65,6 @@ class HabitsViewController: UIViewController {
     
     func setupEverySubview(){
         setupNavigationItems()
-        buttonAddSetup(buttonHere: buttonAdd)
-        tableItemsSetup(tableHere: tableItemsView)
         tableItemsSetupLayout(tableHere: tableItemsView)
         
     }
@@ -68,21 +88,6 @@ class HabitsViewController: UIViewController {
     // MARK: - Setup every subview
     
     
-    func titleHeaderSetup(labelHere: UILabel){
-        labelHere.text = "Сегодня"
-        labelHere.font = UIFont.systemFont(ofSize: 34, weight: UIFont.Weight.bold)
-        labelHere.textColor = UIColor(red: 0, green: 0, blue: 0, alpha: 1)
-        
-    }
-    
-    func buttonAddSetup(buttonHere: UIButton){
-        buttonHere.setTitle("+", for: .normal)
-        buttonHere.titleLabel?.font = UIFont.systemFont(ofSize: 23, weight: UIFont.Weight.regular)
-        buttonHere.setTitleColor(UIColor(red: 0.63, green: 0.09, blue: 0.80, alpha: 1.00), for: .normal)
-        buttonHere.addTarget(self, action: #selector(addNewItem), for: .touchUpInside)
-        
-    }
-    
     @objc func addNewItem(){
         let vc = HabitViewController()
         vc.screenNameContainer = "Создать"
@@ -96,9 +101,7 @@ class HabitsViewController: UIViewController {
     
     
     func tableItemsSetup(tableHere: UITableView){
-        tableHere.separatorStyle = .none
-        tableHere.backgroundColor = UIColor.clear
-        tableHere.showsVerticalScrollIndicator = false
+       
     }
     
     func tableItemsSetupLayout(tableHere: UITableView){

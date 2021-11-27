@@ -12,7 +12,14 @@ class HabitViewController: UIViewController {
     var indexToEdit = 0
     
     //MARK: — UI Elements
-    let itemNameHeader = UILabel()
+    private let itemNameHeader: UILabel = {
+        let labelHere = UILabel()
+        labelHere.text = "НАЗВАНИЕ"
+        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.semibold)
+        
+        return labelHere
+    }()
+        
     let itemNameTextField = UITextField()
     let itemColorHeader = UILabel()
     let itemColorView = UIView()
@@ -54,9 +61,7 @@ class HabitViewController: UIViewController {
     
     @objc func dismissViewController(){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
-        let vc = HabitsViewController()
-        vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
-        navigationController?.pushViewController(vc, animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     
@@ -73,7 +78,7 @@ class HabitViewController: UIViewController {
     }
     
     func setupEverySubview() {
-        itemNameHeaderSetup(labelHere: itemNameHeader)
+     
         itemNameHeaderSetupLayout(labelHere: itemNameHeader)
         itemNameTextFieldSetup(textFieldHere: itemNameTextField)
         itemNameTextFieldSetupLayout(textFieldHere: itemNameTextField)
@@ -92,10 +97,7 @@ class HabitViewController: UIViewController {
         buttonDeleteSetupLayout(buttonHere: deleteButton)}
     }
     // MARK: - Setup every subview
-    func itemNameHeaderSetup(labelHere: UILabel){
-        labelHere.text = "НАЗВАНИЕ"
-        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.semibold)
-    }
+   
     
     func itemNameHeaderSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false

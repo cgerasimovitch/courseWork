@@ -10,10 +10,35 @@ import UIKit
 class HabitsViewHeaderView: UITableViewHeaderFooterView {
 
     let headerId = "HabitsViewHeaderView"
-    let inspireHeader = UILabel()
-    var inspireProgressHeader = UILabel()
-    var inspireProgressView = UIProgressView()
-    let whiteView = UIView()
+    let inspireHeader: UILabel = {
+        let labelHere = UILabel()
+        labelHere.text = "Всё получится!"
+        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.semibold)
+        labelHere.textColor = .systemGray
+        return labelHere
+    }()
+    
+    var inspireProgressHeader: UILabel = {
+        let labelHere = UILabel()
+        labelHere.textAlignment = .right
+        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
+        labelHere.textColor = .systemGray
+        return labelHere
+    }()
+    var inspireProgressView: UIProgressView = {
+        let hereProgressView = UIProgressView()
+        hereProgressView.progressTintColor = UIColor(red: 0.63, green: 0.09, blue: 0.80, alpha: 1.00)
+        hereProgressView.trackTintColor = UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.00)
+        return hereProgressView
+    }()
+    
+    let whiteView: UIView = {
+        let viewHere = UIView()
+        viewHere.backgroundColor = .white
+        viewHere.layer.cornerRadius = 10
+        return viewHere
+    }()
+    
     lazy var store = HabitsStore.shared
     
     override init(reuseIdentifier: String?) {
@@ -41,17 +66,15 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
     
     func setupEverySubview(){
         setupWhiteView(viewHere: whiteView)
-        inspireHeaderSetup(labelHere: inspireHeader)
         inspireHeaderSetupLayout(labelHere: inspireHeader)
-        inspireProgressHeaderSetup(labelHere: inspireProgressHeader)
         inspireProgressHeaderSetupLayout(labelHere: inspireProgressHeader)
-        progressviewSetup(hereProgressView: inspireProgressView)
         progressviewSetupLayout(hereProgressView: inspireProgressView)
     }
     
+    
+    // MARK: - Setup Layout for every subview
+
     func setupWhiteView(viewHere: UIView){
-        viewHere.backgroundColor = .white
-        viewHere.layer.cornerRadius = 10
         viewHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             viewHere.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 5),
@@ -60,14 +83,6 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
             viewHere.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -6)
         ])
     }
-    
-    // MARK: - Setup every subview
-    func inspireHeaderSetup(labelHere: UILabel){
-        labelHere.text = "Всё получится!"
-        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.semibold)
-        labelHere.textColor = .systemGray
-    }
-    
     
     func inspireHeaderSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
@@ -79,12 +94,6 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
         ])
     }
     
-    func inspireProgressHeaderSetup(labelHere: UILabel){
-        
-        labelHere.textAlignment = .right
-        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.regular)
-        labelHere.textColor = .systemGray
-    }
     
     func inspireProgressHeaderSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
@@ -95,16 +104,9 @@ class HabitsViewHeaderView: UITableViewHeaderFooterView {
             labelHere.trailingAnchor.constraint(equalTo: inspireProgressView.trailingAnchor)
         ])
     }
-    func progressviewSetup(hereProgressView: UIProgressView){
-
-        hereProgressView.progressTintColor = UIColor(red: 0.63, green: 0.09, blue: 0.80, alpha: 1.00)
-        hereProgressView.trackTintColor = UIColor(red: 0.95, green: 0.95, blue: 0.97, alpha: 1.00)
-        
-    }
     
     func progressviewSetupLayout(hereProgressView: UIProgressView){
         hereProgressView.translatesAutoresizingMaskIntoConstraints = false
-        
         NSLayoutConstraint.activate([
             hereProgressView.heightAnchor.constraint(equalToConstant: 10),
             hereProgressView.topAnchor.constraint(equalTo: inspireHeader.bottomAnchor, constant: 10),
