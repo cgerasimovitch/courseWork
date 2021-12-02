@@ -26,11 +26,11 @@ class HabitDetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: false)
         title = screenNameContainer
         addTableViewElementsDelegateAndDataSource(tableHere: datesTable)
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: leftTopItemName, style: .plain, target: self, action: #selector(dismissViewController))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveEditedItem))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: leftTopItemName, style: .plain, target: self, action: #selector(dismissViewController))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(editedItem))
         trackedDate = store.habits[indexToTransport].trackDates.reversed()
         
     }
@@ -41,7 +41,7 @@ class HabitDetailsViewController: UIViewController {
     }
     
     func addEverySubview(){
-        self.view.addSubview(datesTable)
+        view.addSubview(datesTable)
     }
     
     func setupEverySubview(){
@@ -63,29 +63,30 @@ class HabitDetailsViewController: UIViewController {
     func tableItemsSetupLayout(tableHere: UITableView){
         tableHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            tableHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            tableHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            tableHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            tableHere.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor)
+            tableHere.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableHere.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableHere.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
         
     }
     
    
     @objc func dismissViewController(){
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
-    @objc func saveEditedItem(){
+    @objc func editedItem(){
         let vc = HabitViewController()
         vc.screenNameContainer = rightTopItemName
         vc.itemNameTextField.text = screenNameContainer
         vc.isNewHabit = false
-        vc.itemColorView.backgroundColor = .white
+        vc.itemColorView.backgroundColor = store.habits[indexToTransport].color
         vc.chosenDate = store.habits[indexToTransport].date
+        print("sending chosenDate: \(vc.chosenDate)")
         vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
         vc.indexToEdit = indexToTransport
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
@@ -99,14 +100,12 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
         60
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        store.habits[indexToTransport].trackDates.count
+        return store.habits[indexToTransport].trackDates.count
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: DetailsCellTableViewCell.cellId, for: indexPath) as! DetailsCellTableViewCell
-        
-        
-        
         if Calendar.current.isDateInToday(trackedDate[indexPath.row]){
             cell.datecellTitle.text = "Сегодня"
         }
@@ -116,8 +115,6 @@ extension HabitDetailsViewController: UITableViewDelegate, UITableViewDataSource
         }
         else { cell.datecellTitle.text =
             dateFormatter.string(from: trackedDate[indexPath.row])}
-            
-        
        
         return cell
     }

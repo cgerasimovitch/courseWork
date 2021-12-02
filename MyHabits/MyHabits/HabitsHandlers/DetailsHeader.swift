@@ -16,8 +16,8 @@ class DetailsHeader: UITableViewHeaderFooterView {
     
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
-        self.contentView.backgroundColor = .white
-        self.contentView.layer.cornerRadius = 10
+        contentView.backgroundColor = .white
+        contentView.layer.cornerRadius = 10
         addEverySubview()
         setupEverySubview()
         
@@ -29,7 +29,7 @@ class DetailsHeader: UITableViewHeaderFooterView {
            }
     
     func addEverySubview(){
-        self.contentView.addSubview(dateHeader)
+        contentView.addSubview(dateHeader)
     }
     
     func setupEverySubview(){
@@ -49,9 +49,9 @@ class DetailsHeader: UITableViewHeaderFooterView {
         NSLayoutConstraint.activate([
             labelHere.widthAnchor.constraint(equalToConstant: 216),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
-            labelHere.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 22),
-            labelHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 16),
-            labelHere.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: 7),
+            labelHere.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 22),
+            labelHere.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+            labelHere.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 7),
         ])
     }
 }

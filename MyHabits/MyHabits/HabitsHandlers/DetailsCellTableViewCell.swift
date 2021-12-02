@@ -25,8 +25,8 @@ class DetailsCellTableViewCell: UITableViewCell {
         }
     
     func addEverySubview(){
-        self.contentView.addSubview(datecellTitle)
-        self.contentView.addSubview(checkMarkMarkLabel)
+        contentView.addSubview(datecellTitle)
+        contentView.addSubview(checkMarkMarkLabel)
     }
     
     func setupEverySubview(){
@@ -46,9 +46,9 @@ class DetailsCellTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             labelHere.widthAnchor.constraint(equalToConstant: 220),
             labelHere.heightAnchor.constraint(equalToConstant: 22),
-            labelHere.topAnchor.constraint(equalTo: self.contentView.topAnchor, constant: 11),
-            labelHere.leadingAnchor.constraint(equalTo: self.contentView.leadingAnchor, constant: 20),
-            labelHere.bottomAnchor.constraint(equalTo: self.contentView.bottomAnchor, constant: -11)
+            labelHere.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 11),
+            labelHere.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
+            labelHere.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -11)
             
         ])
     }
@@ -65,8 +65,8 @@ class DetailsCellTableViewCell: UITableViewCell {
         NSLayoutConstraint.activate([
             labelHere.widthAnchor.constraint(equalToConstant: 33),
             labelHere.heightAnchor.constraint(equalToConstant: 33),
-            labelHere.trailingAnchor.constraint(equalTo: self.contentView.trailingAnchor, constant: -14),
-            labelHere.centerYAnchor.constraint(equalTo: self.contentView.centerYAnchor)
+            labelHere.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -14),
+            labelHere.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
             
         ])
     }

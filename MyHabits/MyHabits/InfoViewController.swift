@@ -8,7 +8,13 @@
 import UIKit
 
 class InfoViewController: UIViewController, UIScrollViewDelegate {
-    let titleHeader = UILabel()
+    let titleHeader: UILabel = {
+        let labelHere = UILabel()
+        labelHere.text = "Привычка за 21 день"
+        labelHere.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.semibold)
+        labelHere.textColor = .black
+        return labelHere
+    }()
     let infoScrollView = UIScrollView()
     let infoLabel = UILabel()
     
@@ -18,36 +24,29 @@ class InfoViewController: UIViewController, UIScrollViewDelegate {
     }
     
     override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
         infoScrollView.delegate = self
         addEverySubview()
         setupEverySubview()
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        navigationController?.setNavigationBarHidden(false, animated: false)
         title = "Информация"
     }
     
     func addEverySubview(){
-        self.view.addSubview(infoScrollView)
+        view.addSubview(infoScrollView)
         infoScrollView.addSubview(infoLabel)
         infoScrollView.addSubview(titleHeader)
     }
 
     func setupEverySubview(){
-        titleHeaderSetup(labelHere: titleHeader)
         titleHeaderSetupLayout(labelHere: titleHeader)
         infoScrollViewSetupLayout(scrollHere: infoScrollView)
-        containerViewSetup()
-        containerViewSetupLayout()
         infoLabelSetup(labelHere: infoLabel)
         infoLabelSetupLayout(labelHere: infoLabel)
     }
     
     // MARK: - setupEverySubview
 
-    func titleHeaderSetup(labelHere: UILabel){
-        labelHere.text = "Привычка за 21 день"
-        labelHere.font = UIFont.systemFont(ofSize: 20, weight: UIFont.Weight.semibold)
-        labelHere.textColor = .black
-    }
     func titleHeaderSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
@@ -67,20 +66,13 @@ class InfoViewController: UIViewController, UIScrollViewDelegate {
     func infoScrollViewSetupLayout(scrollHere: UIScrollView){
         scrollHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            scrollHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            scrollHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            scrollHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor),
-            scrollHere.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
+            scrollHere.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            scrollHere.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            scrollHere.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
     }
-    
-    func containerViewSetup(){
-        
-    }
-    
-    func containerViewSetupLayout(){
-        
-    }
+
     
     func infoLabelSetup(labelHere: UILabel){
         labelHere.text = "Прохождение этапов, за которые за 21 день вырабатывается привычка, подчиняется следующему алгоритму:\n\n1. Провести 1 день без обращения к старым привычкам, стараться вести себя так, как будто цель, загаданная в перспективу, находится на расстоянии шага.\n\n2. Выдержать 2 дня в прежнем состоянии самоконтроля.\n\n3. Отметить в дневнике первую неделю изменений и подвести первые итоги — что оказалось тяжело, что — легче, с чем еще предстоит серьезно бороться. \n\n4. Поздравить себя с прохождением первого серьезного порога в 21 день. За это время отказ от дурных наклонностей уже примет форму осознанного преодоления и человек сможет больше работать в сторону принятия положительных качеств.\n\n5. Держать планку 40 дней. Практикующий методику уже чувствует себя освободившимся от прошлого негатива и двигается в нужном направлении с хорошей динамикой."
@@ -94,8 +86,8 @@ class InfoViewController: UIViewController, UIScrollViewDelegate {
         labelHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             labelHere.topAnchor.constraint(equalTo: titleHeader.bottomAnchor, constant: 16),
-            labelHere.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 16),
-            labelHere.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -16),
+            labelHere.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            labelHere.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
             labelHere.bottomAnchor.constraint(equalTo: infoScrollView.bottomAnchor),
             labelHere.heightAnchor.constraint(lessThanOrEqualToConstant: 876)
         ])

@@ -10,42 +10,48 @@ import UIKit
 class HabitViewController: UIViewController {
 
     var indexToEdit = 0
-    let itemNameHeader = UILabel()
+    
+    //MARK: — UI Elements
+    private let itemNameHeader: UILabel = {
+        let labelHere = UILabel()
+        labelHere.text = "НАЗВАНИЕ"
+        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.semibold)
+        
+        return labelHere
+    }()
+        
     let itemNameTextField = UITextField()
     let itemColorHeader = UILabel()
     let itemColorView = UIView()
     let itemTimeHeader = UILabel()
     let itemCurrentTimeLabel = UILabel()
     let itemDatePicker = UIDatePicker()
-    var chosenDate = Date()
     let deleteButton = UIButton()
+    //MARK: — Variables
+    let store = HabitsStore.shared
+    var colorToChange = UIColor()
+    var chosenDate = Date()
     var screenNameContainer = ""
     var isNewHabit = true
     var leftTopItemName = "Отменить"
     var rightTopItemName = "Сохранить"
     var habitName = ""
-    let store = HabitsStore.shared
-    var everydayString = ""
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = screenNameContainer
-        self.view.backgroundColor = .white
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        view.backgroundColor = .white
+        navigationController?.setNavigationBarHidden(false, animated: false)
         
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: leftTopItemName, style: .plain, target: self, action: #selector(dismissViewController))
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveItem))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: leftTopItemName, style: .plain, target: self, action: #selector(dismissViewController))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: rightTopItemName, style: .plain, target: self, action: #selector(saveItem))
+        
         if isNewHabit == true{
+            colorToChange = UIColor(red: 0.63, green: 0.09, blue: 0.80, alpha: 1.00)
             fetchDate()}
         else{
-            let formatter = DateFormatter()
-            formatter.locale = Locale(identifier: "ru_RU")
-            formatter.dateStyle = .none
-            formatter.timeStyle = .short
-            everydayString = formatter.string(from: chosenDate)
-        }
+            colorToChange = store.habits[indexToEdit].color}
     }
     
     override func viewWillLayoutSubviews() {
@@ -55,26 +61,24 @@ class HabitViewController: UIViewController {
     
     @objc func dismissViewController(){
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "load"), object: nil)
-        let vc = HabitsViewController()
-        vc.modalPresentationStyle = UIModalPresentationStyle.currentContext
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.popToRootViewController(animated: true)
     }
     
     
     func addEverySubview() {
-        self.view.addSubview(itemNameHeader)
-        self.view.addSubview(itemNameTextField)
-        self.view.addSubview(itemColorHeader)
-        self.view.addSubview(itemColorView)
-        self.view.addSubview(itemTimeHeader)
-        self.view.addSubview(itemCurrentTimeLabel)
-        self.view.addSubview(itemDatePicker)
+        view.addSubview(itemNameHeader)
+        view.addSubview(itemNameTextField)
+        view.addSubview(itemColorHeader)
+        view.addSubview(itemColorView)
+        view.addSubview(itemTimeHeader)
+        view.addSubview(itemCurrentTimeLabel)
+        view.addSubview(itemDatePicker)
         if isNewHabit == false{
-            self.view.addSubview(deleteButton)}
+            view.addSubview(deleteButton)}
     }
     
     func setupEverySubview() {
-        itemNameHeaderSetup(labelHere: itemNameHeader)
+     
         itemNameHeaderSetupLayout(labelHere: itemNameHeader)
         itemNameTextFieldSetup(textFieldHere: itemNameTextField)
         itemNameTextFieldSetupLayout(textFieldHere: itemNameTextField)
@@ -90,21 +94,18 @@ class HabitViewController: UIViewController {
         itemDatePickerSetupLayout(datePickerHere: itemDatePicker)
         if isNewHabit == false{
         buttonDeleteSetup(buttonHere: deleteButton)
-            buttonDeleteSetupLayout(buttonHere: deleteButton)}
+        buttonDeleteSetupLayout(buttonHere: deleteButton)}
     }
     // MARK: - Setup every subview
-    func itemNameHeaderSetup(labelHere: UILabel){
-        labelHere.text = "НАЗВАНИЕ"
-        labelHere.font = UIFont.systemFont(ofSize: 13, weight: UIFont.Weight.semibold)
-    }
+   
     
     func itemNameHeaderSetupLayout(labelHere: UILabel){
         labelHere.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             labelHere.widthAnchor.constraint(equalToConstant: 100),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
-            labelHere.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 21),
-            labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+            labelHere.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 21),
+            labelHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         ])
     }
     
@@ -120,7 +121,7 @@ class HabitViewController: UIViewController {
             textFieldHere.widthAnchor.constraint(equalToConstant: 295),
             textFieldHere.heightAnchor.constraint(equalToConstant: 22),
             textFieldHere.topAnchor.constraint(equalTo: itemNameHeader.bottomAnchor, constant: 7),
-            textFieldHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 15)
+            textFieldHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 15)
         ])
     }
     
@@ -135,12 +136,12 @@ class HabitViewController: UIViewController {
             labelHere.widthAnchor.constraint(equalToConstant: 60),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
             labelHere.topAnchor.constraint(equalTo: itemNameTextField.bottomAnchor, constant: 15),
-            labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+            labelHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         ])
     }
     
     func itemColorViewSetup(viewHere: UIView){
-        viewHere.backgroundColor = store.habits[indexToEdit].color
+        viewHere.backgroundColor = colorToChange // !!! Тут ошибка
         viewHere.layer.cornerRadius = 15
         viewHere.isUserInteractionEnabled = true
         //Add gesture
@@ -153,7 +154,7 @@ class HabitViewController: UIViewController {
         let colorPicker = HabitColorViewController()
        
         // Setting the Initial Color of the Picker
-        colorPicker.selectedColor = itemColorView.backgroundColor!
+        colorPicker.selectedColor = colorToChange
 
         // Setting Delegate
         colorPicker.delegate = self
@@ -169,7 +170,7 @@ class HabitViewController: UIViewController {
             viewHere.widthAnchor.constraint(equalToConstant: 30),
             viewHere.heightAnchor.constraint(equalToConstant: 30),
             viewHere.topAnchor.constraint(equalTo: itemColorHeader.bottomAnchor, constant: 7),
-            viewHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+            viewHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         ])
     }
     
@@ -183,20 +184,19 @@ class HabitViewController: UIViewController {
             labelHere.widthAnchor.constraint(equalToConstant: 60),
             labelHere.heightAnchor.constraint(equalToConstant: 18),
             labelHere.topAnchor.constraint(equalTo: itemColorView.bottomAnchor, constant: 15),
-            labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
+            labelHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16)
         ])
     }
     
     func itemCurrentTimeLabelSetup(labelHere: UILabel){
-        
-        let mainString = "Каждый день в \(everydayString) "
-        let stringToColor = "\(everydayString)"
-        let range = (mainString as NSString).range(of: stringToColor)
+        let dateToColor = dateToTime(dateToConvert: chosenDate)
+        let mainString = "Каждый день в \(dateToColor)"
+        let range = (mainString as NSString).range(of: dateToColor)
         let mutableAttributedString = NSMutableAttributedString.init(string: mainString)
-        let fontColor = itemColorView.backgroundColor
+        let fontColor = colorToChange
         mutableAttributedString.addAttribute(NSAttributedString.Key.foregroundColor, value: fontColor, range: range)
         labelHere.attributedText = mutableAttributedString
-       
+        print(mainString)
         
     }
     func itemCurrentTimeLabelSetupLayout(labelHere: UILabel){
@@ -205,15 +205,14 @@ class HabitViewController: UIViewController {
             labelHere.widthAnchor.constraint(equalToConstant: 194),
             labelHere.heightAnchor.constraint(equalToConstant: 22),
             labelHere.topAnchor.constraint(equalTo: itemTimeHeader.bottomAnchor, constant: 7),
-            labelHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
-            labelHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor, constant: 16)
+            labelHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16),
+            labelHere.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: 16)
         ])
     }
     func itemDatePickerSetup(datePickerHere: UIDatePicker){
         datePickerHere.datePickerMode = .time
         datePickerHere.preferredDatePickerStyle = .wheels
         datePickerHere.date = chosenDate
-        
         datePickerHere.addTarget(self, action: #selector(dateChanged(_:)), for: .valueChanged)
         
     }
@@ -223,8 +222,8 @@ class HabitViewController: UIViewController {
         NSLayoutConstraint.activate([
             datePickerHere.heightAnchor.constraint(equalToConstant: 216),
             datePickerHere.topAnchor.constraint(equalTo: itemCurrentTimeLabel.bottomAnchor, constant: 15),
-            datePickerHere.leadingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.leadingAnchor),
-            datePickerHere.trailingAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.trailingAnchor)
+            datePickerHere.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            datePickerHere.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor)
         ])
     }
     
@@ -251,8 +250,7 @@ class HabitViewController: UIViewController {
     
     func deleteItem() {
         store.habits.remove(at: indexToEdit)
-        dismissViewController()
-        
+        dismissViewController()        
         }
     
     
@@ -262,21 +260,22 @@ class HabitViewController: UIViewController {
         NSLayoutConstraint.activate([
             buttonHere.widthAnchor.constraint(equalToConstant: 420),
             buttonHere.heightAnchor.constraint(equalToConstant: 22),
-            buttonHere.bottomAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.bottomAnchor, constant: -18),
-            buttonHere.centerXAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.centerXAnchor)
+            buttonHere.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -18),
+            buttonHere.centerXAnchor.constraint(equalTo: view.safeAreaLayoutGuide.centerXAnchor)
         ])}
     
     @objc func saveItem(){
        
         if itemNameTextField.text != ""{
-        var newHabit = Habit(name: itemNameTextField.text!,
+        let newHabit = Habit(name: itemNameTextField.text!,
                              date: chosenDate as Date,
-                             color: itemColorView.backgroundColor!)
+                             color: colorToChange)
             if isNewHabit == true {
-                self.store.habits.append(newHabit)}
+                store.habits.append(newHabit)}
             else{
-                self.store.habits.remove(at: indexToEdit)
-                self.store.habits.insert(newHabit, at: indexToEdit)
+                store.habits[indexToEdit].name = newHabit.name
+                store.habits[indexToEdit].date = newHabit.date
+                store.habits[indexToEdit].color = newHabit.color
             }
             dismissViewController()
         }
@@ -287,23 +286,36 @@ class HabitViewController: UIViewController {
     
     func fetchDate(){
         
-        let formatter = DateFormatter()
-        formatter.locale = Locale(identifier: "ru_RU")
-        formatter.dateStyle = .none
-        formatter.timeStyle = .short
-        let stringDate = formatter.string(from: itemDatePicker.date)
-        everydayString = stringDate
-        chosenDate = formatter.date(from: stringDate)!
         itemCurrentTimeLabelSetup(labelHere: itemCurrentTimeLabel)
         
     }
     @objc func dateChanged(_ sender: UIDatePicker) {
+        if isNewHabit == true{
+            chosenDate = itemDatePicker.date
+        }
+        chosenDate = updateTimeOnly(dateToChangeTime: chosenDate)
+        
         fetchDate()
     }
     
+    func dateToTime(dateToConvert: Date) -> String{
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "ru_RU")
+        formatter.dateStyle = .none
+        formatter.timeStyle = .short
+        return formatter.string(from: dateToConvert)
+    }
     
-    //MARK: - Saving Habit
-   
+    func updateTimeOnly(dateToChangeTime: Date) -> Date{
+        
+        var currentComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: dateToChangeTime)
+        let datePickerComponents = Calendar.current.dateComponents([.year, .month, .day, .hour, .minute], from: itemDatePicker.date)
+        currentComponents.hour = datePickerComponents.hour
+        currentComponents.minute = datePickerComponents.minute
+        let newDate = Calendar.current.date(from: currentComponents) ?? Date()
+        
+        return(newDate)
+    }
 
 }
 
@@ -311,8 +323,9 @@ extension HabitViewController: UIColorPickerViewControllerDelegate {
     
     //  Called once you have finished picking the color.
     func colorPickerViewControllerDidFinish(_ viewController: UIColorPickerViewController) {
-        self.itemColorView.backgroundColor = viewController.selectedColor
-        
+        colorToChange = viewController.selectedColor
+        itemColorView.backgroundColor = colorToChange
+        itemCurrentTimeLabelSetup(labelHere: itemCurrentTimeLabel)
     }
 }
 
